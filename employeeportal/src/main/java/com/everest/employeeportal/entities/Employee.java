@@ -13,7 +13,7 @@ public class Employee {
     private String everestEmailId;
     private String personalEmailId;
     private Date dateOfBirth;
-    private Date DateOfJoin;
+    private Date dateOfJoin;
     private String designation;
     private Year prevExperience;
     private String bio;

@@ -33,7 +33,7 @@ public class EmployeeController {
     @PutMapping(value = "/{id}")
     public Employee updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
 
-        return employeeRepository.updateEmployee(employee);
+        return employeeRepository.updateEmployee(employee, id);
     }
 
     @PostMapping(value = "")
