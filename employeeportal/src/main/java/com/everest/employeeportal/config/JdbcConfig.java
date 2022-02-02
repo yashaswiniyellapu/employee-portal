@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile(value = "Jpa")
-public class JpaConfig {
+public class JdbcConfig {
     @Value("${spring.datasource.url}")
     private String url;
     @Value("${spring.datasource.password}")
