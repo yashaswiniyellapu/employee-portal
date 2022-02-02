@@ -1,0 +1,23 @@
+package com.everest.employeeportal.entities;
+
+import lombok.Data;
+
+import java.time.Year;
+import java.util.Date;
+
+@Data
+public class Employee {
+    private Long empId;
+    private String firstName;
+    private String lastName;
+    private String everestEmailId;
+    private String personalEmailId;
+    private Date dateOfBirth;
+    private Date DateOfJoin;
+    private String designation;
+    private Year prevExperience;
+    private String bio;
+    private Address presentAddress;
+    private Address permanentAddress;
+
+}
