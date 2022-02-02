@@ -15,28 +15,36 @@ public class EmployeeController {
 
     @GetMapping(value = "")
     public List<Employee> getAllEmployees() {
-        return null;
+
+        return employeeRepository.getAllEmployees();
     }
+
     @GetMapping(value = "/name")
     public List<Employee> getEmployeesByName() {
-        return null;
+        return employeeRepository.getEmployeesByName();
     }
-    @GetMapping(value = "")
-    public List<Employee> getEmployeesSortNameByDateOfJoin() {
-        return null;
-    }
-    @GetMapping(value = "/{id}")
-    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
-        return null;
-    }
-    @GetMapping(value = "")
-    public List<Employee> createEmployee(@RequestBody Employee employee) {
-        return null;
-    }
-    @GetMapping(value ="/{id}")
-    public void deleteEmployee(@PathVariable("id") Long employeeId)
-    {
 
+    @GetMapping(value = "/nameByDate")
+    public List<Employee> getEmployeesSortNameByDateOfJoin() {
+
+        return employeeRepository.getEmployeesSortNameByDateOfJoin();
+    }
+
+    @PutMapping(value = "/{id}")
+    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
+
+        return employeeRepository.updateEmployee(employee);
+    }
+
+    @PostMapping(value = "")
+    public Employee createEmployee(@RequestBody Employee employee) {
+
+        return employeeRepository.createEmployee(employee);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteEmployee(@PathVariable("id") Long employeeId) {
+        employeeRepository.deleteEmployee(employeeId);
     }
 
 }
