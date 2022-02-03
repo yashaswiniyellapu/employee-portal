@@ -17,7 +17,7 @@ public class EmployeeRepository {
         return new ArrayList<>(EMPLOYEES.values());
     }
 
-    public List<Employee> getEmployeesByName() {
+    public Employee getEmployeeByName() {
         return null;
     }
 

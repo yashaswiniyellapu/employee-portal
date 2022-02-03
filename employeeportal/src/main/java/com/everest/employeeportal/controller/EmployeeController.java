@@ -3,6 +3,8 @@ package com.everest.employeeportal.controller;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,13 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/name")
-    public List<Employee> getEmployeesByName() {
-        return employeeRepository.getEmployeesByName();
+    public ResponseEntity<Employee> getEmployeesByName() {
+        final Employee employee = employeeRepository.getEmployeeByName();
+        if (employee == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FOUND).body(employee);
+        }
     }
 
     @GetMapping(value = "/nameByDate")
@@ -31,20 +38,21 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{id}")
-    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
 
-        return employeeRepository.updateEmployee(employee, id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(employeeRepository.updateEmployee(employee, id));
     }
 
     @PostMapping(value = "")
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
 
-        return employeeRepository.createEmployee(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body(employeeRepository.createEmployee(employee));
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteEmployee(@PathVariable("id") Long employeeId) {
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
         employeeRepository.deleteEmployee(employeeId);
+       return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted record") ;
     }
 
 }
