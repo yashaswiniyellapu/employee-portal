@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "employee_details")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id")
     private Long empId;
     @Column(name = "first_name")
@@ -29,7 +28,7 @@ public class Employee {
     @Column(name = "designation")
     private String designation;
     @Column(name = "prev_experience")
-    private Year prevExperience;
+    private int prevExperience;
     @Column(name = "bio")
     private String bio;
 //    private Address presentAddress;
