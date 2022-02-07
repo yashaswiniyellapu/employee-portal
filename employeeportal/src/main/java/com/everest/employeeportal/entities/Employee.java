@@ -29,7 +29,7 @@ public class Employee {
     @Column(name = "designation")
     private String designation;
     @Column(name = "prev_experience")
-    private Year prevExperience;
+    private int prevExperience;
     @Column(name = "bio")
     private String bio;
 

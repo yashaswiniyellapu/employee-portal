@@ -18,8 +18,6 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Employee> getAllEmployees(@PathVariable("id") Long id) {
-        System.out.println("empid "+ id);
-
         Employee EMPLOYEE = employeeService.fetchEmployeeById(id);
         if (EMPLOYEE == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

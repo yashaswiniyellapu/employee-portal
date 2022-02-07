@@ -12,7 +12,7 @@ public class EmployeeService {
 
     public Employee fetchEmployeeById(Long empId) {
 
-        Employee EMPLOYEE = employeeRepository.getById(empId);
+        Employee EMPLOYEE = employeeRepository.findById(empId).orElse(null);
             return EMPLOYEE;
         }
     }
