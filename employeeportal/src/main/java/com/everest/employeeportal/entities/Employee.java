@@ -3,7 +3,6 @@ package com.everest.employeeportal.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.Year;
 import java.util.Date;
 
 @Data
@@ -29,7 +28,7 @@ public class Employee {
     @Column(name = "designation")
     private String designation;
     @Column(name = "prev_experience")
-    private Year prevExperience;
+    private int prevExperience;
     @Column(name = "bio")
     private String bio;
 //    private Address presentAddress;
