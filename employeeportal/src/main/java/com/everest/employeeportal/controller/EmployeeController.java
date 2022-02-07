@@ -1,6 +1,7 @@
 package com.everest.employeeportal.controller;
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,9 @@ public class EmployeeController {
     public ResponseEntity<Employee> getAllEmployees(@PathVariable("id") Long id) {
         Employee EMPLOYEE = employeeService.fetchEmployeeById(id);
         if (EMPLOYEE == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } else {
-            return ResponseEntity.ok().body(EMPLOYEE);
+            throw new EmployeeNotFoundException(id);
         }
+        return ResponseEntity.ok().body(EMPLOYEE);
     }
-
-
 }
+
