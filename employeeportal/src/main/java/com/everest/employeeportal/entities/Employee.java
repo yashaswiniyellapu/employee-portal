@@ -17,7 +17,7 @@ public class Employee {
     private String designation;
     private Year prevExperience;
     private String bio;
-    private Address presentAddress;
-    private Address permanentAddress;
+//    private Address presentAddress;
+//    private Address permanentAddress;
 
 }
