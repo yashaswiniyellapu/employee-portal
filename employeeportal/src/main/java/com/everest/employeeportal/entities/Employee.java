@@ -15,7 +15,7 @@ public class Employee {
     private Date dateOfBirth;
     private Date dateOfJoin;
     private String designation;
-    private Year prevExperience;
+    private int prevExperience;
     private String bio;
     private Address presentAddress;
     private Address permanentAddress;
