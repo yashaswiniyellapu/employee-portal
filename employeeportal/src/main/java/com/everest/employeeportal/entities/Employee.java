@@ -1,6 +1,7 @@
 package com.everest.employeeportal.entities;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Year;
@@ -31,7 +32,11 @@ public class Employee {
     private int prevExperience;
     @Column(name = "bio")
     private String bio;
-//    private Address presentAddress;
-//    private Address permanentAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "present_address")
+    private Address presentAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanent_address")
+    private Address permanentAddress;
 
 }
