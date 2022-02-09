@@ -11,8 +11,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    public List<Employee> fetchAllEmployees()
-    {
+
+    public List<Employee> fetchAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+
+    public Employee findByFirstName(String firstName) {
+        return employeeRepository.findByFirstName(firstName);
     }
 }
