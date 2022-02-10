@@ -17,9 +17,10 @@ public class EmployeeController {
     public final EmployeeService employeeService;
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long id) {
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable("id") Long empId) {
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(employeeService.updateEmployee(employee, id));
+        employee.setEmpId(empId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(employeeService.updateEmployee(employee));
     }
 
 

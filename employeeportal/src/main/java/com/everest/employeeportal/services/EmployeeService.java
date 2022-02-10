@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee updateEmployee(Employee employee, Long empId) {
-        employee.setEmpId(empId);
+    public Employee updateEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 }
