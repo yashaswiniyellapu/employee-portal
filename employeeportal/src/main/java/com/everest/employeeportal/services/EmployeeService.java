@@ -20,11 +20,11 @@ public class EmployeeService {
 
 
     public List<Employee> findByName(String firstName, String lastName) {
-        if(firstName!=null)
-        {
+        if (firstName != null) {
             return employeeRepository.findByFirstNameIgnoreCase(firstName);
+        } else {
+           return employeeRepository.findByLastNameIgnoreCase(lastName);
         }
-        else {
-            return employeeRepository.findByLastNameIgnoreCase(lastName);}
     }
-}
+    }
+
