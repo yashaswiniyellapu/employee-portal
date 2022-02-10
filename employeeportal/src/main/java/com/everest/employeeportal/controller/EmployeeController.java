@@ -19,13 +19,16 @@ public class EmployeeController {
         return employeeService.fetchAllEmployees();
     }
 
-    @GetMapping(value = "/{firstName}")
-    public Employee getEmployeeByName(@PathVariable(name="firstName")String firstName) {
-        Employee EMPLOYEE = employeeService.findByFirstName(firstName);
-        if(EMPLOYEE==null)
-        {throw new NameNotFoundException(firstName);
-        }
-        return EMPLOYEE;
+    @GetMapping(value = "/name")
+    public List<Employee> getEmployeeByName(@RequestParam(required = false)String firstName,
+                                            @RequestParam(required = false)String lastName) {
+
+       List<Employee> employee= employeeService.findByName(firstName,lastName);
+       if(employee.isEmpty())
+       {
+           throw new NameNotFoundException(firstName,lastName);
+       }
+        return employee;
     }
 
 }
