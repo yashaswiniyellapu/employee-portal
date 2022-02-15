@@ -37,7 +37,6 @@ public class Employee {
     @Column(name = "designation")
     private String designation;
     @Column(name = "prev_experience")
-    @Nullable
     private int prevExperience;
     @Column(name = "bio")
     @NotBlank(message = "The bio field must contain one word")
