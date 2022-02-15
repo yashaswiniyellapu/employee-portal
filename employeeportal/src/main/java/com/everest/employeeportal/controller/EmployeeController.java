@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/employees")
 @RequiredArgsConstructor
@@ -18,8 +20,8 @@ public class EmployeeController {
 
 
     @PostMapping(value = "")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employee));
+    public Employee createEmployee(@Valid @RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
     }
 
 

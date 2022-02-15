@@ -1,37 +1,29 @@
 package com.everest.employeeportal.entities;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.util.Optional;
+import javax.validation.constraints.*;
 
-@MappedSuperclass
 @Data
-public abstract class Address {
+@Entity
+@Table(name = "Address")
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
-    @Column(name = "address_line1")
+    private Long id;
+    @NotBlank(message = "The addressLine1 field must not blank")
     private String addressLine1;
-    @Column(name = "address_line2")
     private String addressLine2;
     @Column(name = "city")
+    @NotEmpty(message = "The city field must not empty")
     private String city;
-    @Column(name = "state")
+    @NotEmpty(message = "The state filed must contain empty")
     private String state;
-    @Column(name = "zipcode")
+    @NotNull(message = "The zipcode field must not null")
+    @Min(value = 515000, message = "The zipcode field must have 515000 value")
     private int zipcode;
-    @Column(name = "country")
+    @NotBlank(message = "The field must contain country")
     private String country;
-
-}
-@Entity
-@Table(name ="present_address")
-class PresentAddress extends Address{
-}
-@Entity
-@Table(name ="permanent_address")
-class PermanentAddress extends Address {
-
 }
