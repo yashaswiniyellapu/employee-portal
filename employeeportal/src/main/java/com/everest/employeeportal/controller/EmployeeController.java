@@ -4,7 +4,11 @@ import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.NameNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,15 +24,14 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/name")
-    public List<Employee> getEmployeeByName(@RequestParam(required = false)String firstName,
-                                            @RequestParam(required = false)String lastName) {
+    public List<Employee> getEmployeeByName(@RequestParam(name = "name") String name) {
 
-       List<Employee> employee= employeeService.findByName(firstName,lastName);
-       if(employee.isEmpty())
-       {
-           throw new NameNotFoundException(firstName,lastName);
-       }
+        List<Employee> employee = employeeService.findByName(name);
+        if (employee.isEmpty()) {
+            throw new NameNotFoundException(name);
+        }
         return employee;
     }
+
 
 }
