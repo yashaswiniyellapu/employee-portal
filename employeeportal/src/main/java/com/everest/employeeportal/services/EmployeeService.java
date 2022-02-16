@@ -12,11 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
     @Transactional(readOnly = true)
     public Employee fetchEmployeeById(Long empId) {
 
         return employeeRepository.findById(empId).orElse(null);
+    }
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
     }
 }
