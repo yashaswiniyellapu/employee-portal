@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
     @Transactional(readOnly = true)
     public Employee fetchEmployeeById(Long empId) {
 
