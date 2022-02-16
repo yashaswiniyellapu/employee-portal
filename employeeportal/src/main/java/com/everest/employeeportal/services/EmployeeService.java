@@ -15,10 +15,12 @@ import java.util.List;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    @Transactional(readOnly = true)
     public List<Employee> fetchAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<Employee> findByName(String name) {
 
         return employeeRepository.findAll(propertiesLike(name));
