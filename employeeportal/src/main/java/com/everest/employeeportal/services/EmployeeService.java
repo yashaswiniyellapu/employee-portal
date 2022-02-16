@@ -5,7 +5,9 @@ import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Sort;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +26,8 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public List<Employee> findByName(String name) {
-
-        return employeeRepository.findAll(propertiesLike(name));
+    public Page<Employee> findByName(String name, int pageNumber) {
+        return employeeRepository.findAll(propertiesLike(name), PageRequest.of(pageNumber, 5));
     }
 
     private Specification<Employee> propertiesLike(String name) {

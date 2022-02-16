@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @RestController
@@ -28,9 +28,12 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/name")
-    public List<Employee> getEmployeeByName(@RequestParam(name = "name") String name) {
+    public Page<Employee> getEmployeeByName(@RequestParam(name = "name")
+                                            @NotBlank(message = "name must not blank") String name,
+                                            @RequestParam(name = "page")
+                                            @Min(value = 0, message = "Indexing start from zero") int pageNumber) {
 
-        List<Employee> employee = employeeService.findByName(name);
+        Page<Employee> employee = employeeService.findByName(name, pageNumber);
         if (employee.isEmpty()) {
             throw new NameNotFoundException(name);
         }
