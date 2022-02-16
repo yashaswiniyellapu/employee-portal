@@ -1,8 +1,8 @@
 package com.everest.employeeportal.exceptions;
 
 public class EmptyDataException extends  RuntimeException {
-    public EmptyDataException()
+    public EmptyDataException(Long empId)
     {
-        super("Record not found");
+        super("Record not with id "+empId+" found");
     }
 }

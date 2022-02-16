@@ -21,7 +21,7 @@ public class EmployeeController {
         try {
             employeeService.deleteEmployee(empId);
         } catch (Exception e) {
-            throw new EmptyDataException();
+            throw new EmptyDataException(empId);
         }
         return ResponseEntity.status(HttpStatus.FOUND).body("deleted successfully");
     }
