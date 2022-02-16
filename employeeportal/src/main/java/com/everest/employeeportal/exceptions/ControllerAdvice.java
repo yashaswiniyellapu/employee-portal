@@ -1,4 +1,3 @@
-
 package com.everest.employeeportal.exceptions;
 
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
+
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<Object> employeeNotFound(Exception ex) {
+        return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status,

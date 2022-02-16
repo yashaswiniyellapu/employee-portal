@@ -14,5 +14,9 @@ public class EmployeeService {
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
+    @Transactional(readOnly = true)
+    public Employee fetchEmployeeById(Long empId) {
+
+        return employeeRepository.findById(empId).orElse(null);
     }
 }
