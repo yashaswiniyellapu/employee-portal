@@ -19,11 +19,11 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Employee> getAllEmployees(@PathVariable("id") Long id) {
-        Employee EMPLOYEE = employeeService.fetchEmployeeById(id);
-        if (EMPLOYEE == null) {
+        Employee employee = employeeService.fetchEmployeeById(id);
+        if (employee == null) {
             throw new EmployeeNotFoundException(id);
         }
-        return ResponseEntity.ok().body(EMPLOYEE);
+        return ResponseEntity.ok().body(employee);
     }
 }
 
