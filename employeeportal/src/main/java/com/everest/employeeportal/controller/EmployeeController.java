@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -21,7 +23,7 @@ public class EmployeeController {
     public final EmployeeService employeeService;
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable(name = "id")
+    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable(name = "id")
                                                  @Min(value = 1, message = "The id must start from one")
                                                          Long empId) {
         try {
@@ -29,7 +31,9 @@ public class EmployeeController {
         } catch (Exception e) {
             throw new EmptyDataException(empId);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body("deleted successfully");
+        Map<String,Object> status = Map.of("timestamp", LocalDateTime.now(),
+                "status","deleted successfully");
+        return ResponseEntity.status(HttpStatus.FOUND).body(status);
     }
 
 }
