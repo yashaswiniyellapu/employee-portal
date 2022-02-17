@@ -27,7 +27,7 @@ public class EmployeeController {
         if (updatedEmployee == null) {
             throw new EmployeeNotFoundException(empId);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(employeeService.updateEmployee(employee, empId));
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(employee, empId));
     }
 
 
