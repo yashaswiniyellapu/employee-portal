@@ -27,10 +27,10 @@ public class EmployeeController {
         return employeeService.fetchAllEmployees();
     }
 
-    @GetMapping(value = "/name")
-    public Page<Employee> getEmployeeByName(@RequestParam(name = "name")
+    @GetMapping(value = "/search")
+    public Page<Employee> getEmployeeBySearch(@RequestParam(name = "name")
                                             @NotBlank(message = "name must not blank") String name,
-                                            @RequestParam(name = "page")
+                                            @RequestParam(name = "page", required=false,defaultValue = "1")
                                             @Min(value = 0, message = "Indexing start from zero") int pageNumber) {
 
         Page<Employee> employee = employeeService.findByName(name, pageNumber);
