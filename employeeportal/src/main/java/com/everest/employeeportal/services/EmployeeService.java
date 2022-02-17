@@ -17,6 +17,6 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public Page<Employee> fetchAllEmployees(int pageNumber) {
-        return employeeRepository.findAll(PageRequest.of(pageNumber, 10));
+        return employeeRepository.findAll(PageRequest.of(pageNumber-1, 10));
     }
 }

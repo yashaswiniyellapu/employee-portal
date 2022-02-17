@@ -17,8 +17,8 @@ public class EmployeeController {
     public final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Page<Employee> getAllEmployees(@RequestParam(name="page")
-                                                      @Min(value=0, message="The page indexing from zero")
+    public Page<Employee> getAllEmployees(@RequestParam(name="page", required = false, defaultValue = "1")
+                                                      @Min(value=1, message="The page indexing from zero")
                                                       int pageNumber) {
         return employeeService.fetchAllEmployees(pageNumber);
     }
