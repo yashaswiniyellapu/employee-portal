@@ -1,6 +1,7 @@
 package com.everest.employeeportal.controller;
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.entities.EmployeeResults;
 import com.everest.employeeportal.exceptions.NameNotFoundException;
 import com.everest.employeeportal.exceptions.PropertyNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
@@ -29,16 +30,16 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/search")
-    public Page<Employee> getEmployeeBySearch(@RequestParam(name = "query")
+    public EmployeeResults getEmployeeBySearch(@RequestParam(name = "query")
                                               @NotBlank(message = "name must not blank") String name,
-                                              @RequestParam(name = "page", required = false, defaultValue = "1")
+                                               @RequestParam(name = "page", required = false, defaultValue = "1")
                                               @Min(value = 1, message = "Indexing start from one") int pageNumber) {
 
-        Page<Employee> employee = employeeService.findByName(name, pageNumber);
-        if (employee.isEmpty()) {
+        Page<Employee> paginatedEmployees = employeeService.findByName(name, pageNumber);
+        if (paginatedEmployees.isEmpty()) {
             throw new NameNotFoundException(name);
         }
-        return employee;
+        return new EmployeeResults(paginatedEmployees);
     }
 
     @GetMapping(value = "/sort")
