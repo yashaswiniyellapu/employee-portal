@@ -38,6 +38,14 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }  @ExceptionHandler(EmployeeAlreadyExistsException.class)
+    public ResponseEntity<Object> employeeAlreadyExists(Exception ex,
+                                                               WebRequest request) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        body.put("client",request.getDescription(true));
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
 }

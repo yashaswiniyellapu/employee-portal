@@ -33,16 +33,5 @@ public class EmployeeController {
     public Employee createEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }
-
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Employee> getAllEmployees(@PathVariable("id")
-                                                        @Min(value= 1, message = "Id min value is one") Long id) {
-        Employee employee = employeeService.fetchEmployeeById(id);
-        if (employee == null) {
-            throw new EmployeeNotFoundException(id);
-        }
-        return ResponseEntity.ok().body(employee);
-    }
 }
 
