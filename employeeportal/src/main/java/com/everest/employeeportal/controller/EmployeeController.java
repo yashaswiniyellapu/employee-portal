@@ -42,12 +42,12 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/sort")
-    public Page<Employee> sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "sort", required = false) String query,
-                                                          @RequestParam(name = "page", required = false, defaultValue = "1")
-                                                          @Min(value = 1, message = "Page indexing from one")
-                                                                  int pageNumber) {
+    public EmployeeResults sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "sort", required = false) String query,
+                                                           @RequestParam(name = "page", required = false, defaultValue = "1")
+                                                                   @Min(value = 1, message = "Page indexing from one") int pageNumber) {
 
-        return employeeService.sortBy(query, pageNumber);
+        Page<Employee> paginatedEmployees= employeeService.sortBy(query, pageNumber);
+        return new EmployeeResults(paginatedEmployees);
     }
 
 
