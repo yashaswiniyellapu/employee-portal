@@ -3,7 +3,6 @@ package com.everest.employeeportal.controller;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.entities.EmployeeResults;
 import com.everest.employeeportal.exceptions.NameNotFoundException;
-import com.everest.employeeportal.exceptions.PropertyNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,9 +30,9 @@ public class EmployeeController {
 
     @GetMapping(value = "/search")
     public EmployeeResults getEmployeeBySearch(@RequestParam(name = "query")
-                                              @NotBlank(message = "name must not blank") String name,
+                                               @NotBlank(message = "name must not blank") String name,
                                                @RequestParam(name = "page", required = false, defaultValue = "1")
-                                              @Min(value = 1, message = "Indexing start from one") int pageNumber) {
+                                               @Min(value = 1, message = "Indexing start from one") int pageNumber) {
 
         Page<Employee> paginatedEmployees = employeeService.findByName(name, pageNumber);
         if (paginatedEmployees.isEmpty()) {
@@ -43,17 +42,12 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/sort")
-    public Page<Employee> sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "name", required = false) String name,
-                                                          @RequestParam(name = "dateOfJoin", required = false) String doj,
-                                                          @RequestParam(name = "page")
-                                                          @Min(value = 0, message = "Page indexing from zero")
+    public Page<Employee> sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "sort", required = false) String query,
+                                                          @RequestParam(name = "page", required = false, defaultValue = "1")
+                                                          @Min(value = 1, message = "Page indexing from one")
                                                                   int pageNumber) {
 
-        Page<Employee> employees = employeeService.sortByProperties(name, doj, pageNumber);
-        if (employees == null) {
-            throw new PropertyNotFoundException();
-        }
-        return employees;
+        return employeeService.sortBy(query, pageNumber);
     }
 
 
