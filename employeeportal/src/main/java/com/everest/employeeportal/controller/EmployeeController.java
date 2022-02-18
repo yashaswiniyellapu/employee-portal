@@ -22,7 +22,7 @@ public class EmployeeController {
 
     @GetMapping(value = "")
     public EmployeeResults getAllEmployees(@RequestParam(name = "page", required = false, defaultValue = "1")
-                                           @Min(value = 1, message = "The page indexing from zero")
+                                           @Min(value = 1, message = "The page indexing from one")
                                                    int pageNumber) {
         Page<Employee> paginatedEmployees = employeeService.fetchAllEmployees(pageNumber);
         return new EmployeeResults(paginatedEmployees);
