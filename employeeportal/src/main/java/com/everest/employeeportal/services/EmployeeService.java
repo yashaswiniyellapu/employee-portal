@@ -10,8 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -19,8 +17,9 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     @Transactional(readOnly = true)
-    public List<Employee> fetchAllEmployees() {
-        return employeeRepository.findAll();
+    public Page<Employee> findAllEmployees(int pageNumber) {
+
+        return employeeRepository.findAll(PageRequest.of(pageNumber-1, 10));
     }
 
     @Transactional(readOnly = true)
@@ -32,9 +31,6 @@ public class EmployeeService {
     @Transactional(readOnly = true)
     public Page<Employee> sortBy(String query, int pageNumber) {
         String[] property = query.split(",");
-        if (property[1].isEmpty()) {
-            property[1] = "asc";
-        }
         return employeeRepository.findAll(PageRequest.
                 of(pageNumber - 1, 10, Sort.by(Sort.Order.by(property[0])
                         .with(Sort.Direction.valueOf(property[1].toUpperCase())))));

@@ -23,10 +23,10 @@ import java.util.List;
 public class EmployeeController {
     public final EmployeeService employeeService;
 
-    @GetMapping(value = "")
-    public List<Employee> getAllEmployees() {
-        return employeeService.fetchAllEmployees();
-    }
+//       @GetMapping(value = "")
+//    public List<Employee> getAllEmployees() {
+//        return employeeService.findAllEmployees();
+//    }
 
     @GetMapping(value = "/search")
     public EmployeeResults getEmployeeBySearch(@RequestParam(name = "query")
@@ -41,13 +41,17 @@ public class EmployeeController {
         return new EmployeeResults(paginatedEmployees);
     }
 
-    @GetMapping(value = "/sort")
+    @GetMapping(value = "")
     public EmployeeResults sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "sort", required = false) String query,
                                                            @RequestParam(name = "page", required = false, defaultValue = "1")
-                                                                   @Min(value = 1, message = "Page indexing from one") int pageNumber) {
+                                                           @Min(value = 1, message = "Page indexing from one")
+                                                                   int pageNumber) {
 
-        Page<Employee> paginatedEmployees= employeeService.sortBy(query, pageNumber);
-        return new EmployeeResults(paginatedEmployees);
+        if (query != null) {
+            Page<Employee> paginatedEmployees = employeeService.sortBy(query, pageNumber);
+            return new EmployeeResults(paginatedEmployees);
+        }
+        return new EmployeeResults(employeeService.findAllEmployees(pageNumber));
     }
 
 
