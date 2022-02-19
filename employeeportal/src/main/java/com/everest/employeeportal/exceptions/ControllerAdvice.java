@@ -16,6 +16,14 @@ import java.util.Map;
 @org.springframework.web.bind.annotation.ControllerAdvice
 
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(EmptyDataException.class)
+    public ResponseEntity<Object> emptyDataException(Exception e) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp",LocalDateTime.now());
+        body.put("message",e.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<Object> employeeNotFound(Exception ex) {
         return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
