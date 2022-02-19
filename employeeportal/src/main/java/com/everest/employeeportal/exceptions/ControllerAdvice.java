@@ -20,33 +20,33 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EmptyDataException.class)
     public ResponseEntity<Object> emptyDataException(Exception e) {
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp",LocalDateTime.now());
-        body.put("message",e.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", e.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<Object> employeeNotFound(Exception ex) {
-        return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status,
-                                                                  WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getFieldError().getDefaultMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
+        @ExceptionHandler(EmployeeNotFoundException.class)
+        public ResponseEntity<Object> employeeNotFound (Exception ex){
+            return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> constraintViolationException(ConstraintViolationException ex,
-                                                               WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
+        @Override
+        protected ResponseEntity<Object> handleMethodArgumentNotValid (MethodArgumentNotValidException ex,
+                HttpHeaders headers, HttpStatus status,
+                WebRequest request){
+            Map<String, Object> body = new HashMap<>();
+            body.put("timestamp", LocalDateTime.now());
+            body.put("message", ex.getFieldError().getDefaultMessage());
+            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        }
+        @ExceptionHandler(ConstraintViolationException.class)
+        public ResponseEntity<Object> constraintViolationException (ConstraintViolationException ex,
+                WebRequest request){
+            Map<String, Object> body = new HashMap<>();
+            body.put("timestamp", LocalDateTime.now());
+            body.put("message", ex.getMessage());
+            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        }
 
-}
+    }
 

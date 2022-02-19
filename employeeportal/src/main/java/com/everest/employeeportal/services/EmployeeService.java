@@ -15,6 +15,7 @@ public class EmployeeService {
 
     public void deleteEmployee(Long empId) {
         employeeRepository.deleteById(empId);
+    }
 
     @Transactional(readOnly = true)
     public Employee fetchEmployeeById(Long empId) {
