@@ -1,5 +1,6 @@
 package com.everest.employeeportal.services;
 
+import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+
     public void deleteEmployee(Long empId) {
         employeeRepository.deleteById(empId);
 
+    @Transactional(readOnly = true)
+    public Employee fetchEmployeeById(Long empId) {
+
+        return employeeRepository.findById(empId).orElse(null);
     }
 }
