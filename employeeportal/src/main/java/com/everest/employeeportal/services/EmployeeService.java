@@ -1,6 +1,7 @@
 package com.everest.employeeportal.services;
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
 
+    public Employee createEmployee(Employee employee) {
+        if (employeeRepository.existsByEverestEmailId(employee.getEverestEmailId())) {
+            throw new EmployeeAlreadyExistsException(employee.getEverestEmailId());
+        }
+
     public void deleteEmployee(Long empId) {
         employeeRepository.deleteById(empId);
     }
@@ -20,9 +26,6 @@ public class EmployeeService {
     @Transactional(readOnly = true)
     public Employee fetchEmployeeById(Long empId) {
 
-        return employeeRepository.findById(empId).orElse(null);
-    }
-    public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 }
