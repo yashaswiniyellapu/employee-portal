@@ -2,9 +2,12 @@ package com.everest.employeeportal.controller;
 
 
 import com.everest.employeeportal.entities.Employee;
+
+
 import com.everest.employeeportal.entities.EmployeeResults;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.exceptions.EmptyDataException;
+
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,9 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+
+
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/employees")
@@ -25,6 +31,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmployeeController {
     public final EmployeeService employeeService;
+
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee,
+                                                   @PathVariable("id") @Min(value = 1, message = "min value of id 1")
+                                                           Long empId) {
+        Employee updatedEmployee = employeeService.updateEmployee(employee, empId);
+        if (updatedEmployee == null) {
+            throw new EmployeeNotFoundException(empId);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(employee, empId));
+    }
+
+
     @GetMapping(value = "")
     public EmployeeResults getAllEmployees(@RequestParam(name = "page", required = false, defaultValue = "1")
                                            @Min(value = 1, message = "The page indexing from one")
@@ -61,4 +81,5 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.FOUND).body(status);
         }
     }
+
 

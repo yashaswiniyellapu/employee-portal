@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
+
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmptyDataException.class)
@@ -31,6 +32,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
         body.put("client",request.getDescription(true));
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }

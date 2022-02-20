@@ -29,3 +29,4 @@ public class Address {
     @NotBlank(message = "The field must contain country")
     private String country;
 }
+
