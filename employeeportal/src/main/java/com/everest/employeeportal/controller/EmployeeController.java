@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -42,8 +41,8 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "")
-    public EmployeeResults sortEmployeeByNameAndDateOfJoin(@RequestParam(name = "sort", required = false) String query,
-                                                           @RequestParam(name = "page", required = false, defaultValue = "1")
+    public EmployeeResults getAllEmployees(@RequestParam(name = "sort", required = false) String query,
+                                           @RequestParam(name = "page", required = false, defaultValue = "1")
                                                            @Min(value = 1, message = "Page indexing from one")
                                                                    int pageNumber) {
 
