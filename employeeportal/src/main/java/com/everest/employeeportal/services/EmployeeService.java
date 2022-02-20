@@ -13,10 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+
     public Employee createEmployee(Employee employee) {
         if (employeeRepository.existsByEverestEmailId(employee.getEverestEmailId())) {
             throw new EmployeeAlreadyExistsException(employee.getEverestEmailId());
         }
+
+    public void deleteEmployee(Long empId) {
+        employeeRepository.deleteById(empId);
+    }
+
+    @Transactional(readOnly = true)
+    public Employee fetchEmployeeById(Long empId) {
 
         return employeeRepository.save(employee);
     }
