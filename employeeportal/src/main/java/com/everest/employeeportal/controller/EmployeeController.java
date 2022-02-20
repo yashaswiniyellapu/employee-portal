@@ -10,17 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -28,6 +24,20 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class EmployeeController {
     public final EmployeeService employeeService;
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Optional<Employee>> getAllEmployees(@PathVariable("id")
+                                                              @Min(value= 1, message = "Id min value is one") Long id) {
+        Optional<Employee> employee = employeeService.fetchEmployeeById(id);
+        if (employee.isEmpty()) {
+            throw new EmployeeNotFoundException(id);
+        }
+        return ResponseEntity.ok().body(employee);
+    }
+    @PostMapping(value = "")
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee)
+    {
+        return  ResponseEntity.status(HttpStatus.CREATED).body(employeeService.createEmployee(employee));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable(name = "id")
@@ -43,14 +53,5 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.FOUND).body(status);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Employee> getAllEmployees(@PathVariable("id")
-                                                        @Min(value= 1, message = "Id min value is one") Long id) {
-        Employee employee = employeeService.fetchEmployeeById(id);
-        if (employee == null) {
-            throw new EmployeeNotFoundException(id);
-        }
-        return ResponseEntity.ok().body(employee);
-    }
 }
 
