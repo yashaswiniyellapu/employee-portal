@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class EmployeeResults {
+
     private List<Employee> data;
     private int pageSize;
     private int pageNumber;
@@ -15,7 +16,10 @@ public class EmployeeResults {
     private int totalElements;
 
 
-    public EmployeeResults(Page<Employee> paginatedEmployees) {
+
+    public EmployeeResults(Page<Employee> paginatedEmployees)
+    {
+
         setData(paginatedEmployees.getContent());
         setPageSize(paginatedEmployees.getSize());
         setPageNumber(paginatedEmployees.getNumber());

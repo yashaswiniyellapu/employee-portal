@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 
 
 
-@Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long>{
+
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    Boolean existsByEverestEmailId(String emailId);
     @Query("select e from Employee e where firstName like %?1% or lastName like %?1%")
     Page<Employee> findByName(String name, Pageable pageable);
 
 }
+
+
