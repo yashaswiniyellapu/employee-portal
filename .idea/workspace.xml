@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/EmployeePortalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/EmployeePortalApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/entities/EmployeeResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/EmployeeResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/ApiError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/ApiError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/ControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/ControllerAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/EmployeeAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/EmployeeAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/EmployeeNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/EmployeeNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/EmptyDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/EmptyDataException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/NameNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/NameNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/exceptions/PropertyNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/exceptions/PropertyNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/repository/EmployeeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/repository/EmployeeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/java/com/everest/employeeportal/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/services/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employeeportal/src/test/java/com/everest/employeeportal/EmployeePortalApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/everest/employeeportal/EmployeePortalApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +12,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
