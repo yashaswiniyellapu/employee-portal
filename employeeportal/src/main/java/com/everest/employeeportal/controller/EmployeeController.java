@@ -34,9 +34,6 @@ public class EmployeeController {
                                                @Min(value = 1, message = "Indexing start from one") int pageNumber) {
 
         Page<Employee> paginatedEmployees = employeeService.findByName(name, pageNumber);
-        if (paginatedEmployees.isEmpty()) {
-            throw new NameNotFoundException(name);
-        }
         return new EmployeeResults(paginatedEmployees);
     }
 
