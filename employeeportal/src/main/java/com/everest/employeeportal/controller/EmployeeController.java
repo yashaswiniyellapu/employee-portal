@@ -2,6 +2,16 @@ package com.everest.employeeportal.controller;
 
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.NameNotFoundException;
+import lombok.RequiredArgsConstructor;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import javax.validation.constraints.NotBlank;
+
 
 
 import com.everest.employeeportal.entities.EmployeeResults;
@@ -25,6 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
+
 @RestController
 @RequestMapping("/api/employees")
 @Validated
@@ -32,6 +43,28 @@ import java.util.Optional;
 public class EmployeeController {
     public final EmployeeService employeeService;
 
+
+    @GetMapping(value = "/search")
+    public EmployeeResults getEmployeeBySearch(@RequestParam(name = "query")
+                                               @NotBlank(message = "name must not blank") String name,
+                                               @RequestParam(name = "page", required = false, defaultValue = "1")
+                                               @Min(value = 1, message = "Indexing start from one") int pageNumber) {
+
+        Page<Employee> paginatedEmployees = employeeService.findByName(name, pageNumber);
+        return new EmployeeResults(paginatedEmployees);
+    }
+
+    @GetMapping(value = "")
+    public EmployeeResults getAllEmployees(@RequestParam(name = "sort", required = false) String query,
+                                           @RequestParam(name = "page", required = false, defaultValue = "1")
+                                                           @Min(value = 1, message = "Page indexing from one")
+                                                                   int pageNumber) {
+
+        if (query != null) {
+            Page<Employee> paginatedEmployees = employeeService.sortBy(query, pageNumber);
+            return new EmployeeResults(paginatedEmployees);
+        }
+        return new EmployeeResults(employeeService.findAllEmployees(pageNumber));
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee,
@@ -51,6 +84,7 @@ public class EmployeeController {
                                                    int pageNumber) {
         Page<Employee> paginatedEmployees = employeeService.fetchAllEmployees(pageNumber);
         return new EmployeeResults(paginatedEmployees);
+
     }
         @GetMapping(value = "/{id}")
         public ResponseEntity<Optional<Employee>> getAllEmployees (@PathVariable("id")
@@ -81,5 +115,6 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.FOUND).body(status);
         }
     }
+
 
 
