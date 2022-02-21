@@ -16,8 +16,10 @@ public class EmployeeResults {
     private int totalElements;
 
 
+
     public EmployeeResults(Page<Employee> paginatedEmployees)
     {
+
         setData(paginatedEmployees.getContent());
         setPageSize(paginatedEmployees.getSize());
         setPageNumber(paginatedEmployees.getNumber());
@@ -25,4 +27,5 @@ public class EmployeeResults {
         setHasPrevious(paginatedEmployees.hasPrevious());
         setTotalElements(paginatedEmployees.getNumberOfElements());
     }
+
 }
