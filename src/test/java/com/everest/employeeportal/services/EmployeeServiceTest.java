@@ -3,6 +3,7 @@ package com.everest.employeeportal.services;
 import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
+import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -89,8 +90,22 @@ class EmployeeServiceTest {
         when(employeeRepo.save(updatedData)).then(invocation->invocation.getArgument(0));
         //data operations
         Employee updatedEmployee = employeeService.updateEmployee(updatedData,employee.getEmpId());
-        System.out.println(updatedData.getEmpId());
         //assert service layer
         assertThat(updatedEmployee).isIn(updatedData);
+        verify(employeeRepo).save(any(Employee.class));
+    }
+    @Test
+    void shouldThrowErrorWhenUpdatingEmployeeWithNonExistingEmplId()
+    {
+        Employee updatedData = new Employee(null, "yashu", "yellapu",
+                "yashu@Everest", null, null, null,
+                "trainee", 0, "good",
+                new Address(null, "ATPPreLine1", "ATPPreLine2",
+                        "guljarPet", "Andhra", 515001, "India"),
+                new Address(null, "ATPPerLine1", "ATPPerLine2",
+                        "guljarPet", "AndhraPradesh", 515002, "India"));
+        when(employeeRepo.existsById(3L)).thenReturn(false);
+        assertThrows(EmployeeNotFoundException.class,()->{employeeService.updateEmployee(updatedData,3L);});
+        verify(employeeRepo,never()).save(any(Employee.class));
     }
 }

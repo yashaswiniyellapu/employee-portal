@@ -2,6 +2,7 @@ package com.everest.employeeportal.services;
 
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
+import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -54,7 +55,7 @@ public class EmployeeService {
 
     public Employee updateEmployee(Employee employee, Long empId) {
         if (!employeeRepository.existsById(empId)) {
-            return null;
+            throw new EmployeeNotFoundException(empId);
         }
         employee.setEmpId(empId);
         return employeeRepository.save(employee);
