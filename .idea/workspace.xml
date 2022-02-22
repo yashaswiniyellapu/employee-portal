@@ -64,7 +64,7 @@
       <recent name="com.everest.employeeportal.services" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EmployeeServiceTest">
+  <component name="RunManager" selected="JUnit.EmployeeServiceTest.shouldThrowErrorWhenSavingEmployeeWithExistingEverestEmailId">
     <configuration name="EmployeePortalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -95,8 +95,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EmployeeServiceTest.shouldThrowErrorWhenSavingEmployeeWithExistingEverestEmailId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employeeportal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.everest.employeeportal.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.everest.employeeportal.services" />
+      <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.services.EmployeeServiceTest" />
+      <option name="METHOD_NAME" value="shouldThrowErrorWhenSavingEmployeeWithExistingEverestEmailId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmployeeServiceTest.shouldThrowErrorWhenSavingEmployeeWithExistingEverestEmailId" />
         <item itemvalue="JUnit.EmployeeServiceTest" />
         <item itemvalue="Application.EmployeePortalApplication" />
       </list>
