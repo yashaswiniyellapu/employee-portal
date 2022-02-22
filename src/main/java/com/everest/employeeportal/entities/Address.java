@@ -1,6 +1,8 @@
 package com.everest.employeeportal.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,6 +13,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Table(name = "Address")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
