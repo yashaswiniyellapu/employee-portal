@@ -31,6 +31,7 @@ class EmployeeServiceTest {
                         "guljarPet", "Andhra", 515001, "India"),
                 new Address(null, "ATPPerLine1", "ATPPerLine2",
                         "guljarPet", "AndhraPradesh", 515002, "India"));
+        Mockito.when(employeeRepo.existsByEverestEmailId("yashu@Everest")).thenReturn(false);
         Mockito.when(employeeRepo.save(employee)).then(invocation -> invocation.getArgument(0));
         Employee savedEmployee = employeeService.createEmployee(employee);
         assertThat(savedEmployee).isNotNull();
