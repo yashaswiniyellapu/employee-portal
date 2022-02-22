@@ -29,7 +29,7 @@ class EmployeeServiceTest {
     void setup() {
         employeeRepo = Mockito.mock(EmployeeRepository.class);
         employeeService = new EmployeeService(employeeRepo);
-        employee=new Employee(null, "yashu", null,
+        employee = new Employee(1L, "yashu", null,
                 "yashu@Everest", null, null, null,
                 "trainee", 0, "good",
                 new Address(null, "ATPPreLine1", "ATPPreLine2",
@@ -49,28 +49,48 @@ class EmployeeServiceTest {
         assertThat(savedEmployee).isNotNull();
         verify(employeeRepo).save(any(Employee.class));
     }
+
     @Test
     void shouldThrowErrorWhenSavingEmployeeWithExistingEverestEmailId() {
         when(employeeRepo.existsByEverestEmailId("yashu@Everest")).thenReturn(true);
-        assertThrows(EmployeeAlreadyExistsException.class,()->{
-            employeeService.createEmployee(employee);});
-        verify(employeeRepo,never()).save(any(Employee.class));
+        assertThrows(EmployeeAlreadyExistsException.class, () -> {
+            employeeService.createEmployee(employee);
+        });
+        verify(employeeRepo, never()).save(any(Employee.class));
 
     }
+
     @Test
-    void shouldGetAllPaginatedEmployees()
-    {
+    void shouldGetAllPaginatedEmployees() {
         //arranging data
-        List<Employee> employeeData= List.of(employee);
-        Pageable pageable = PageRequest.of(0,10);
-        Page<Employee> paginatedEmployees = new PageImpl<>(employeeData,pageable,1);
+        List<Employee> employeeData = List.of(employee);
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Employee> paginatedEmployees = new PageImpl<>(employeeData, pageable, 1);
         when(employeeRepo.findAll(pageable)).thenReturn(paginatedEmployees);
         //operations on data
-        Page<Employee> employeeList= employeeService.findAllEmployees(1);
+        Page<Employee> employeeList = employeeService.findAllEmployees(1);
         //asserting data
         assertThat(employeeList.getTotalElements()).isEqualTo(1);
         verify(employeeRepo).findAll(any(Pageable.class));
     }
 
-
+    @Test
+    void shouldUpdateEmployeeWithExistingId()
+    {
+        //arranging data
+        Employee updatedData = new Employee(null, "yashu", "yellapu",
+            "yashu@Everest", null, null, null,
+            "trainee", 0, "good",
+            new Address(null, "ATPPreLine1", "ATPPreLine2",
+                    "guljarPet", "Andhra", 515001, "India"),
+            new Address(null, "ATPPerLine1", "ATPPerLine2",
+                    "guljarPet", "AndhraPradesh", 515002, "India"));
+        when(employeeRepo.existsById(employee.getEmpId())).thenReturn(true);
+        when(employeeRepo.save(updatedData)).then(invocation->invocation.getArgument(0));
+        //data operations
+        Employee updatedEmployee = employeeService.updateEmployee(updatedData,employee.getEmpId());
+        System.out.println(updatedData.getEmpId());
+        //assert service layer
+        assertThat(updatedEmployee).isIn(updatedData);
+    }
 }
