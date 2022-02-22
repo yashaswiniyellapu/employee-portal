@@ -4,6 +4,7 @@ import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
+import com.everest.employeeportal.exceptions.EmptyDataException;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -107,5 +108,14 @@ class EmployeeServiceTest {
         when(employeeRepo.existsById(3L)).thenReturn(false);
         assertThrows(EmployeeNotFoundException.class,()->{employeeService.updateEmployee(updatedData,3L);});
         verify(employeeRepo,never()).save(any(Employee.class));
+    }
+
+    @Test
+    void shouldThrowErrorWhenDeletingEmployeeWithNonExistingId()
+    {
+        //arranging Data
+        when(employeeRepo.existsById(3L)).thenReturn(false);
+        assertThrows(EmptyDataException.class,()->{employeeService.deleteEmployee(3L);});
+        verify(employeeRepo,never()).deleteById(any(Long.class));
     }
 }
