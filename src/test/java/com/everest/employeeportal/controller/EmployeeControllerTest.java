@@ -2,7 +2,9 @@ package com.everest.employeeportal.controller;
 
 import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,10 +22,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -71,16 +75,34 @@ class EmployeeControllerTest {
         when(employeeService.findEmployeeById(employeeId)).thenReturn(Optional.empty());
         mockMvc.perform(get("/api/employees/{id}", employeeId)).andExpect(status().isNotFound());
     }
+
     @Test
     void shouldCreateEmployee() throws Exception {
-        when(employeeService.createEmployee(any(Employee.class))).then(invocation->invocation.getArgument(0));
-        Employee newEmployee=
+        when(employeeService.createEmployee(any(Employee.class))).then(invocation -> invocation.getArgument(0));
+        Employee newEmployee =
                 new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
         mockMvc.perform(post("/api/employees")
-                .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
+                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.everestEmailId", is(newEmployee.getEverestEmailId())));
-
+    }
+    @Test
+    void shouldUpdateEmployeeWithExistingId() throws Exception {
+        Employee updatedData =
+                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+        when(employeeService.updateEmployee(any(Employee.class),eq(1L))).then(invocation->(invocation.getArgument(0)));
+        mockMvc.perform(put("/api/employees/{id}",1L).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedData)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.empId",is((int)1L)));
+    }  @Test
+    void shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId() throws Exception {
+        Employee updatedData =
+                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+        when(employeeService.updateEmployee(any(Employee.class),eq(1L))).thenThrow(EmployeeNotFoundException.class);
+        mockMvc.perform(put("/api/employees/{id}",1L).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedData)))
+                .andExpect(status().isNotFound());
     }
 
 }

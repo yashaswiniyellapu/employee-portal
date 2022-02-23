@@ -69,10 +69,7 @@ public class EmployeeController {
                                                    @PathVariable("id") @Min(value = 1, message = "min value of id 1")
                                                            Long empId) {
         Employee updatedEmployee = employeeService.updateEmployee(employee, empId);
-        if (updatedEmployee == null) {
-            throw new EmployeeNotFoundException(empId);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(employee, empId));
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(updatedEmployee, empId));
     }
 
     @DeleteMapping("/{id}")
