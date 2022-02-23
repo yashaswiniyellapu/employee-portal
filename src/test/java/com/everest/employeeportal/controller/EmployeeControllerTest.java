@@ -52,6 +52,13 @@ class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.size()", is(employeesList.size())));
     }
-
+    @Test
+    void shouldFindEmployeeById() throws Exception {
+        when(employeeService.findEmployeeById(employeesList.get(0).getEmpId()))
+                .thenReturn(Optional.of(employeesList.get(0)));
+        mockMvc.perform(get("/api/employees/{id}",employeesList.get(0).getEmpId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.everestEmailId",is(employeesList.get(0).getEverestEmailId())));
+    }
 
 }
