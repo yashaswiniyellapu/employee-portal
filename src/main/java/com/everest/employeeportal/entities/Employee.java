@@ -1,6 +1,8 @@
 package com.everest.employeeportal.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "employee_details")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

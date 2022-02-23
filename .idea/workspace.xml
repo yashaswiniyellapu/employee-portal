@@ -4,11 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="" />
+    <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employeeportal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/employeeportal.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/entities/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/entities/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/entities/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/entities/Employee.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,12 +57,22 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.42988506" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.everest.employeeportal.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.EmployeeControllerTest.shouldFindEmployeeById">
     <configuration name="EmployeePortalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -61,8 +88,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EmployeeControllerTest.shouldFindAllEmployees" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employeeportal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.everest.employeeportal.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
+      <option name="METHOD_NAME" value="shouldFindAllEmployees" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeControllerTest.shouldFindEmployeeById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employeeportal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.everest.employeeportal.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
+      <option name="METHOD_NAME" value="shouldFindEmployeeById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldFindEmployeeById" />
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldFindAllEmployees" />
         <item itemvalue="Application.EmployeePortalApplication" />
       </list>
     </recent_temporary>
