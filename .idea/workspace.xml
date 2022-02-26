@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/services/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/everest/employeeportal/controller/EmployeeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/everest/employeeportal/controller/EmployeeControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/everest/employeeportal/controller/EmployeeController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,16 +69,18 @@
       <recent name="com.everest.employeeportal.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EmployeeControllerTest.shouldThrowBadRequestIfEmployeeAlreadyExists">
-    <configuration name="EmployeePortalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.EmployeePortalApplication" />
+  <component name="RunManager" selected="JUnit.EmployeeControllerTest">
+    <configuration name="EmployeeControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.everest.employeeportal.*" />
+          <option name="PATTERN" value="com.everest.employeeportal.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -95,7 +101,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeControllerTest.shouldFindEmployeeById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmployeeControllerTest.shouldDeleteEmployeeRecordAndReturnSuccessfullyAsStatus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
         <pattern>
@@ -105,13 +111,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
       <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
-      <option name="METHOD_NAME" value="shouldFindEmployeeById" />
+      <option name="METHOD_NAME" value="shouldDeleteEmployeeRecordAndReturnSuccessfullyAsStatus" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeControllerTest.shouldThrowBadRequestIfEmployeeAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmployeeControllerTest.shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
         <pattern>
@@ -121,13 +127,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
       <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
-      <option name="METHOD_NAME" value="shouldThrowBadRequestIfEmployeeAlreadyExists" />
+      <option name="METHOD_NAME" value="shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeControllerTest.shouldThrowNotFoundErrorWhenFetchingNonExistingUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmployeeControllerTest.shouldTrowErrorDeleteEmployeeRecordWithNonExisting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
         <pattern>
@@ -137,7 +143,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
       <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
-      <option name="METHOD_NAME" value="shouldThrowNotFoundErrorWhenFetchingNonExistingUser" />
+      <option name="METHOD_NAME" value="shouldTrowErrorDeleteEmployeeRecordWithNonExisting" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EmployeeControllerTest.shouldThrowBadRequestIfEmployeeAlreadyExists" />
+        <item itemvalue="JUnit.EmployeeControllerTest" />
         <item itemvalue="JUnit.EmployeeControllerTest.shouldCreateEmployee" />
-        <item itemvalue="JUnit.EmployeeControllerTest.shouldThrowNotFoundErrorWhenFetchingNonExistingUser" />
-        <item itemvalue="Application.EmployeePortalApplication" />
-        <item itemvalue="JUnit.EmployeeControllerTest.shouldFindEmployeeById" />
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldTrowErrorDeleteEmployeeRecordWithNonExisting" />
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldDeleteEmployeeRecordAndReturnSuccessfullyAsStatus" />
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId" />
       </list>
     </recent_temporary>
   </component>

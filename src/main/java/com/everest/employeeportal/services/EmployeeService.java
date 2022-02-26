@@ -3,6 +3,7 @@ package com.everest.employeeportal.services;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
+import com.everest.employeeportal.exceptions.EmptyDataException;
 import com.everest.employeeportal.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -61,8 +64,15 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public void deleteEmployee(Long empId) {
+    public Map<String, Object> deleteEmployee(Long empId) {
+
+        if(!employeeRepository.existsById(empId))
+        {
+            throw new EmptyDataException(empId);
+        }
         employeeRepository.deleteById(empId);
+        return Map.of("timestamp", LocalDateTime.now(),
+                "status", "deleted successfully");
     }
 
 }

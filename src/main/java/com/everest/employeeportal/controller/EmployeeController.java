@@ -4,9 +4,7 @@ package com.everest.employeeportal.controller;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.entities.EmployeeResults;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
-import com.everest.employeeportal.exceptions.EmptyDataException;
 import com.everest.employeeportal.services.EmployeeService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -74,18 +71,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable(name = "id")
+    public ResponseEntity<Map<String, Object> >deleteEmployee(@PathVariable(name = "id")
                                                               @Min(value = 1, message = "The id must start from one")
                                                                       Long empId) {
-        try {
-            employeeService.deleteEmployee(empId);
-        } catch (Exception e) {
-            throw new EmptyDataException(empId);
-        }
-        Map<String, Object> status = Map.of("timestamp", LocalDateTime.now(),
-                "status", "deleted successfully");
-        return ResponseEntity.status(HttpStatus.FOUND).body(status);
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.deleteEmployee(empId));
     }
-}
+    }
+
 
 

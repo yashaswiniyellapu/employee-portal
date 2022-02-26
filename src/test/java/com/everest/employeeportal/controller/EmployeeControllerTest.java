@@ -4,6 +4,7 @@ import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
+import com.everest.employeeportal.exceptions.EmptyDataException;
 import com.everest.employeeportal.services.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,13 +18,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -82,33 +84,35 @@ class EmployeeControllerTest {
     @Test
     void shouldCreateEmployee() throws Exception {
         when(employeeService.createEmployee(any(Employee.class))).then(invocation -> invocation.getArgument(0));
-        Employee newEmployee = new Employee();
-               new Employee(null, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+        Employee newEmployee =
+        new Employee(null, "yashu", " yellapu", "yashu@Everest", null, null, null, "trainee", 0, " good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
         mockMvc.perform(post("/api/employees")
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.everestEmailId", is(newEmployee.getEverestEmailId())));
     }
 
-        @Test
+    @Test
     void shouldThrowBadRequestIfEmployeeAlreadyExists() throws Exception {
         Employee newEmployee =
                 new Employee(null, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
-            when(employeeService.createEmployee(newEmployee)).thenThrow(new EmployeeAlreadyExistsException(newEmployee.getEverestEmailId()));
+        when(employeeService.createEmployee(newEmployee)).thenThrow(new EmployeeAlreadyExistsException(newEmployee.getEverestEmailId()));
         mockMvc.perform(post("/api/employees")
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message",is("The employee with everestMailId " + newEmployee.getEverestEmailId() + " already exists")));
+                .andExpect(jsonPath("$.message", is("The employee with everestMailId " + newEmployee.getEverestEmailId() + " already exists")));
     }
-//    @Test
-//    void shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation() throws Exception {
-//        when(employeeService.createEmployee(any(Employee.class))).thenThrow(ConstraintViolationException.class);
-//        Employee newEmployee =
-//                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 414001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 415002, "India"));
-//        mockMvc.perform(post("/api/employees")
-//                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
-//                .andExpect(status().isBadRequest());
-//    }
+
+    @Test
+    void shouldThrowBadRequestWhileSavingWithEmptyFields() throws Exception {
+        Employee newEmployee =
+                new Employee(1L, null, "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 414001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 415002, "India"));
+        mockMvc.perform(post("/api/employees")
+                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("The firstName field must not blank")));
+    }
+
     @Test
     void shouldUpdateEmployeeWithExistingId() throws Exception {
         Employee updatedData =
@@ -124,10 +128,30 @@ class EmployeeControllerTest {
     void shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId() throws Exception {
         Employee updatedData =
                 new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
-        when(employeeService.updateEmployee(any(Employee.class), eq(1L))).thenThrow(EmployeeNotFoundException.class);
+
+        when(employeeService.updateEmployee(updatedData, 1L)).thenThrow(new EmployeeNotFoundException(updatedData.getEmpId()));
+
         mockMvc.perform(put("/api/employees/{id}", 1L).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedData)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message", is("Employee with id " + updatedData.getEmpId() + " not found")));
+    }
+
+    @Test
+    void shouldDeleteEmployeeRecordAndReturnSuccessfullyAsStatus() throws Exception {
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", "deleted successfully");
+        when(employeeService.deleteEmployee(1L)).thenReturn(body);
+        mockMvc.perform(delete("/api/employees/{id}", 1L))
+                .andExpect(status().isOk());
+    }  @Test
+    void shouldTrowErrorDeleteEmployeeRecordWithNonExisting() throws Exception {
+        when(employeeService.deleteEmployee(1L)).thenThrow(new EmptyDataException(1L));
+        mockMvc.perform(delete("/api/employees/{id}", 1L))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message",is("Record with employee id "+1L+" not found")));
     }
 
 }
