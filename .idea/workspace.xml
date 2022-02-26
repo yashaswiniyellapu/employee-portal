@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="304375e5-702d-488d-9c01-d25f476589c7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/EmployeeResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/everest/employeeportal/entities/EmployeeResults.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/everest/employeeportal/controller/EmployeeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/everest/employeeportal/controller/EmployeeControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +65,7 @@
       <recent name="com.everest.employeeportal.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EmployeeControllerTest.shouldFindAllEmployees">
+  <component name="RunManager" selected="JUnit.EmployeeControllerTest.shouldFindEmployeeById">
     <configuration name="EmployeeControllerTest.shouldCreateEmployee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
@@ -99,7 +98,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeControllerTest.shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmployeeControllerTest.shouldFindEmployeeById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employeeportal" />
       <extension name="coverage">
         <pattern>
@@ -109,7 +108,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.everest.employeeportal.controller" />
       <option name="MAIN_CLASS_NAME" value="com.everest.employeeportal.controller.EmployeeControllerTest" />
-      <option name="METHOD_NAME" value="shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation" />
+      <option name="METHOD_NAME" value="shouldFindEmployeeById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldFindEmployeeById" />
+        <item itemvalue="JUnit.EmployeeControllerTest.shouldCreateEmployee" />
         <item itemvalue="JUnit.EmployeeControllerTest.shouldFindAllEmployees" />
         <item itemvalue="JUnit.EmployeeControllerTest.shouldUpdateEmployeeWithExistingId" />
-        <item itemvalue="JUnit.EmployeeControllerTest.shouldCreateEmployee" />
         <item itemvalue="JUnit.EmployeeControllerTest.shouldThrowNotFoundErrorWhenFetchingNonExistingUser" />
-        <item itemvalue="JUnit.EmployeeControllerTest.shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation" />
       </list>
     </recent_temporary>
   </component>

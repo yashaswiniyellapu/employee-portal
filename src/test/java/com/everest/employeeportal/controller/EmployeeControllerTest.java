@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -64,11 +65,13 @@ class EmployeeControllerTest {
 
     @Test
     void shouldFindEmployeeById() throws Exception {
-        when(employeeService.findEmployeeById(employeesList.get(0).getEmpId()))
+        when(employeeService.findEmployeeById(1L))
                 .thenReturn(Optional.of(employeesList.get(0)));
         mockMvc.perform(get("/api/employees/{id}", employeesList.get(0).getEmpId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.everestEmailId", is(employeesList.get(0).getEverestEmailId())));
+                .andExpect(jsonPath("$.empId", is(1)))
+                .andExpect(jsonPath("$.everestEmailId",is(employeesList.get(0).getEverestEmailId())))
+                .andExpect(jsonPath("$.size()",is(12)));
     }
 
     @Test
