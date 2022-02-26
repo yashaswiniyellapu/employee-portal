@@ -2,6 +2,7 @@ package com.everest.employeeportal.controller;
 
 import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,29 +76,30 @@ class EmployeeControllerTest {
         Long employeeId = 1L;
         mockMvc.perform(get("/api/employees/{id}", employeeId))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.message", is(is("Employee with id " + employeeId + " not found"))));
+                .andExpect(jsonPath("$.message", is("Employee with id " + employeeId + " not found")));
     }
 
     @Test
     void shouldCreateEmployee() throws Exception {
         when(employeeService.createEmployee(any(Employee.class))).then(invocation -> invocation.getArgument(0));
-        Employee newEmployee =
-                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+        Employee newEmployee = new Employee();
+               new Employee(null, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
         mockMvc.perform(post("/api/employees")
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.everestEmailId", is(newEmployee.getEverestEmailId())));
     }
 
-    //    @Test
-//    void shouldThrowBadRequestIfEmployeeAlreadyExists() throws Exception {
-//        when(employeeService.createEmployee(any(Employee.class))).thenThrow(EmployeeAlreadyExistsException.class);
-//        Employee newEmployee =
-//                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
-//        mockMvc.perform(post("/api/employees")
-//                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
-//                .andExpect(status().isBadRequest());
-//    }
+        @Test
+    void shouldThrowBadRequestIfEmployeeAlreadyExists() throws Exception {
+        Employee newEmployee =
+                new Employee(null, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+            when(employeeService.createEmployee(newEmployee)).thenThrow(new EmployeeAlreadyExistsException(newEmployee.getEverestEmailId()));
+        mockMvc.perform(post("/api/employees")
+                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message",is("The employee with everestMailId " + newEmployee.getEverestEmailId() + " already exists")));
+    }
 //    @Test
 //    void shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation() throws Exception {
 //        when(employeeService.createEmployee(any(Employee.class))).thenThrow(ConstraintViolationException.class);
