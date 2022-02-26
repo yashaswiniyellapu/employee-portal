@@ -2,9 +2,9 @@ package com.everest.employeeportal.controller;
 
 import com.everest.employeeportal.entities.Address;
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.exceptions.EmployeeAlreadyExistsException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.services.EmployeeService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,13 +17,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.closeTo;
-import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -57,7 +56,10 @@ class EmployeeControllerTest {
         when(employeeService.findAllEmployees(1)).thenReturn(new PageImpl<>(employeesList, pageable, 3));
         this.mockMvc.perform(get("/api/employees"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.size()", is(employeesList.size())));
+                .andExpect(jsonPath("$.data.size()", is(employeesList.size())))
+                .andExpect(jsonPath("$.currentPageNumber",is(0)))
+                .andExpect(jsonPath("$.totalElements",is(employeesList.size())))
+                .andExpect(jsonPath("$.pageSize",is(10)));
     }
 
     @Test
@@ -86,6 +88,24 @@ class EmployeeControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.everestEmailId", is(newEmployee.getEverestEmailId())));
     }
+//    @Test
+//    void shouldThrowBadRequestIfEmployeeAlreadyExists() throws Exception {
+//        when(employeeService.createEmployee(any(Employee.class))).thenThrow(EmployeeAlreadyExistsException.class);
+//        Employee newEmployee =
+//                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 515001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 515002, "India"));
+//        mockMvc.perform(post("/api/employees")
+//                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
+//                .andExpect(status().isBadRequest());
+//    }
+//    @Test
+//    void shouldThrowBadRequestIfEmployeeDataFailsInConstraintValidation() throws Exception {
+//        when(employeeService.createEmployee(any(Employee.class))).thenThrow(ConstraintViolationException.class);
+//        Employee newEmployee =
+//                new Employee(1L, "yashu", "yellapu", "yashu@Everest", null, null, null, "trainee", 0, "good", new Address(null, "ATPPreLine2", "ATPPreLine3", "guljarPet", "Andhra", 414001, "India"), new Address(null, "ATPPerLine2", "ATPPerLine3", "guljarPet", "AndhraPradesh", 415002, "India"));
+//        mockMvc.perform(post("/api/employees")
+//                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(newEmployee)))
+//                .andExpect(status().isBadRequest());
+//    }
     @Test
     void shouldUpdateEmployeeWithExistingId() throws Exception {
         Employee updatedData =
@@ -94,7 +114,7 @@ class EmployeeControllerTest {
         mockMvc.perform(put("/api/employees/{id}",1L).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedData)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.empId",is((int)1L)));
+                .andExpect(jsonPath("$.empId",is(1)));
     }  @Test
     void shouldThrowNotFoundWhenUpdatingEmployeeWithNonExistingId() throws Exception {
         Employee updatedData =

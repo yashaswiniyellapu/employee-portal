@@ -10,7 +10,7 @@ public class EmployeeResults {
 
     private List<Employee> data;
     private int pageSize;
-    private int pageNumber;
+    private int currentPageNumber;
     private boolean hasNext;
     private boolean hasPrevious;
     private int totalElements;
@@ -22,7 +22,7 @@ public class EmployeeResults {
 
         setData(paginatedEmployees.getContent());
         setPageSize(paginatedEmployees.getSize());
-        setPageNumber(paginatedEmployees.getNumber());
+        setCurrentPageNumber(paginatedEmployees.getNumber());
         setHasNext(paginatedEmployees.hasNext());
         setHasPrevious(paginatedEmployees.hasPrevious());
         setTotalElements(paginatedEmployees.getNumberOfElements());
