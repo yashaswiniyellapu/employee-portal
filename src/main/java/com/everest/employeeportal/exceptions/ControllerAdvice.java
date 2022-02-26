@@ -23,7 +23,6 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
-
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
@@ -45,19 +44,20 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmployeeAlreadyExistsException.class)
     public ResponseEntity<Object> employeeAlreadyExists(Exception ex,
-
                                                         WebRequest request) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
-        body.put("client", request.getDescription(true));
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 
     }
 
     @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<Object> employeeNotFound(Exception ex) {
-        return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> employeeNotFoundException(Exception ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @Override

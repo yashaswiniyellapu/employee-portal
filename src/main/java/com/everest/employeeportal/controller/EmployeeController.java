@@ -6,6 +6,7 @@ import com.everest.employeeportal.entities.EmployeeResults;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.exceptions.EmptyDataException;
 import com.everest.employeeportal.services.EmployeeService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
