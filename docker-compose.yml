@@ -16,9 +16,14 @@ services:
   db:
     image: 'postgres'
     container_name: db
+    volumes:
+      - postgres-data:/var/lib/docker/volumes/postgres-data/_data
+
     ports:
       - 5432:5432
     environment:
       - POSTGRES_DB=employee
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=yes
+volumes:
+  postgres-data:
