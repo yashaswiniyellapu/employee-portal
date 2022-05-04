@@ -1,15 +1,14 @@
 services:
-  app:
-    image: 'employee-portal:latest'
-    build:
-      context: .
-    container_name: app
+  app-server:
+    image: 'backend:v1'
+    container_name: backend
     ports:
       - 8080:8080
     depends_on:
       - db
+      - app-client
     environment:
-      - SPRING_DATASOURCE_URL= jdbc:postgresql://db:5432/employee
+      - SPRING_DATASOURCE_URL= jdbc:postgresql://db:5432/employee-data
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=yes
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -18,12 +17,17 @@ services:
     container_name: db
     volumes:
       - postgres-data:/var/lib/docker/volumes/postgres-data/_data
-
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_DB=employee
+      - POSTGRES_DB=employee-data
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=yes
+  app-client:
+    image: 'frontend:v1'
+    container_name: frontend
+    ports:
+      - 3000:3000
+
 volumes:
   postgres-data:
