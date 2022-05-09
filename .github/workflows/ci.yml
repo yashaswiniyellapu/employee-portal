@@ -84,8 +84,8 @@ jobs:
           - name: Run compose files
             run: |
               ls
-              echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-              ssh -o StrictHostKeyChecking=no -i private_key ${USERNAME}@${HOST_DNS} '
+              echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+              ssh -o StrictHostKeyChecking=no -i private_key ${USERNAME}@${HOST_DNS}
               docker-compose down
               docker-compose up
 
