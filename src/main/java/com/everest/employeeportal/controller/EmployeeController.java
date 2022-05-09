@@ -68,10 +68,6 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee,
                                                    @PathVariable("id") @Min(value = 1, message = "min value of id 1")
                                                            Long empId) {
-        Employee updatedEmployee = employeeService.updateEmployee(employee, empId);
-        if (updatedEmployee == null) {
-            throw new EmployeeNotFoundException(empId);
-        }
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.updateEmployee(employee, empId));
     }
 
@@ -79,14 +75,7 @@ public class EmployeeController {
     public ResponseEntity<Map<String, Object>> deleteEmployee(@PathVariable(name = "id")
                                                               @Min(value = 1, message = "The id must start from one")
                                                                       Long empId) {
-        try {
-            employeeService.deleteEmployee(empId);
-        } catch (Exception e) {
-            throw new EmptyDataException(empId);
-        }
-        Map<String, Object> status = Map.of("timestamp", LocalDateTime.now(),
-                "status", "deleted successfully");
-        return ResponseEntity.status(HttpStatus.FOUND).body(status);
+        return ResponseEntity.status(HttpStatus.FOUND).body(employeeService.deleteEmployee(empId));
     }
 }
 
