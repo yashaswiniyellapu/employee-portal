@@ -61,6 +61,7 @@ jobs:
               password: ${{ secrets.DOCKER_PASSWORD }}
   deploy:
         name: Deploy application into ec2 instance
+        needs: [backend,frontend]
         runs-on: ubuntu-latest
 
         steps:
