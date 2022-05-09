@@ -50,8 +50,13 @@ jobs:
               npm install 
               pwd
           - name: Build & push Docker image
-            run: |
-              cd frontend
-              pwd
-              
+            run: cd frontend
+            uses: mr-smithers-excellent/docker-build-push@v5
+            with:
+              image: yashuyellapu/employee-portal-fullstack
+              tags: frontend-latest
+              registry: docker.io
+              dockerfile: Dockerfile
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_PASSWORD }}
 
