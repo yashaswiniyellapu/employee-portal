@@ -50,5 +50,8 @@ jobs:
               npm install 
               pwd
           - name: Build & push Docker image
-            run: pwd
+            run: |
+              cd frontend
+              pwd
+              
 
