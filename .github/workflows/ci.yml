@@ -52,11 +52,11 @@ jobs:
           - name: Build & push Docker image
             uses: mr-smithers-excellent/docker-build-push@v5
             with:
-              directory: ./frontend
+              directory: ./frontend/
               image: yashuyellapu/employee-portal-fullstack
               tags: frontend-latest
               registry: docker.io
-              dockerfile: Dockerfile
+              dockerfile: ./frontend/Dockerfile
               username: ${{ secrets.DOCKER_USERNAME }}
               password: ${{ secrets.DOCKER_PASSWORD }}
 
