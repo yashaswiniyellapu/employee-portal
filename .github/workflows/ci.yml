@@ -87,7 +87,7 @@ jobs:
               echo "${{secrets.EC2_SSH_KEY}}" > private_key.pem && chmod 600 private_key.pem
               ssh -i private_key.pem ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}
               docker-compose down
-              docker-compose up
+              docker-compose up -y -d
           - name: Docker containers
             run: |
               docker ps
