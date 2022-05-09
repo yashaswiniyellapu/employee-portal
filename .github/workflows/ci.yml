@@ -83,5 +83,5 @@ jobs:
           - name: Run compose files
             run: |
               docker-compose down
-              docker-compose up
+              docker-compose up -y
 
