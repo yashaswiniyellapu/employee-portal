@@ -84,6 +84,8 @@ jobs:
           - name: Run compose files
             run: |
               ls
+              ssh -i "$secrets.EC2_SSH_KEY" ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}
+              sudo -s
               docker-compose down
-              docker-compose up -y
+              docker-compose up
 
