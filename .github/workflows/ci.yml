@@ -82,6 +82,7 @@ jobs:
               password: ${{ secrets.DOCKER_PASSWORD }}
           - name: Run compose files
             run: |
+              ls
               docker-compose down
               docker-compose up -y
 
