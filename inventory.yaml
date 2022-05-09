@@ -1,0 +1,6 @@
+localhost:
+  hosts:
+    3.109.210.196:
+      ansible_ssh_extra_args: -o StrictHostKeyChecking=no
+      ansible_ssh_user: ${{secrets.USERNAME}}
+      ansible_ssh_private_key_file: ${{secrets.EC2_SSH_KEY}}

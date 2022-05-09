@@ -1,0 +1,22 @@
+- name: "Playing with Ansible and Git"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Run apt-update and apt-upgrade
+        apt:
+          upgrade: yes
+          update_cache: yes
+    -name: Install docker-ce
+        apt:
+          name: docker-ce
+          state: latest
+          update_cache: true
+    -name: Install docker-compose
+        apt:
+          name: docker-compose
+          state: latest
+    -name: Docker compose down
+     shell: docker-compose down
+    -name: Docker compose up
+     shell: docker-compose up
+
