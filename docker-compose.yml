@@ -1,6 +1,6 @@
 services:
   app-server:
-    image: 'backend:v1'
+    image: 'yashuyellapu/employee-portal-fullstack:backend-latest'
     container_name: backend
     ports:
       - 8080:8080
@@ -24,7 +24,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=yes
   app-client:
-    image: 'frontend:v1'
+    image: 'yashuyellapu/employee-portal-fullstack:frontend-latest'
     container_name: frontend
     ports:
       - 3000:3000
