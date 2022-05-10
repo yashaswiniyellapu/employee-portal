@@ -6,8 +6,8 @@
       apt:
           upgrade: yes
           update_cache: yes
-    -name: Install docker-ce
-     apt:
+    - name: Install docker-io
+      apt:
           name: docker.io
           state: latest
           update_cache: true
@@ -20,8 +20,8 @@
       when: >
           docker_compose_current_version is not defined
           or docker_compose_current_version is version(docker_compose_version, '<')
-    -name: Docker compose down
-     shell: docker-compose down
-    -name: Docker compose up
-     shell: docker-compose up
+    - name: Docker compose down
+      shell: docker-compose down
+    - name: Docker compose up
+      shell: docker-compose up
 
