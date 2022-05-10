@@ -1,5 +1,5 @@
 - name: "Playing with Ansible and Git"
-  hosts: 15.206.163.193
+  hosts: web
   tasks:
     - name: Run apt-update and apt-upgrade
       apt:
