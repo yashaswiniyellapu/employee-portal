@@ -78,7 +78,7 @@ jobs:
           - name: Create secret-key
             run:
               echo "${{ secrets.EC2_SSH_KEY }}" > aws_key.pem
-              chmod 600 aws_key.pem
+              chmod 400 aws_key.pem
               ls -a
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
