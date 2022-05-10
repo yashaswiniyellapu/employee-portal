@@ -68,7 +68,7 @@ jobs:
           - name: Checkout the files
             uses: actions/checkout@v3
 
-          - name: Deploy to ec2 ubuntu server
+          - name: Deploy to ec2 server
             uses: easingthemes/ssh-deploy@main
             env:
               SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -77,7 +77,6 @@ jobs:
               TARGET: ${{ secrets.TARGET_DIR }}
               run:
                 echo "${{secrets.EC2_SSH_KEY}}" > private_key.pem && chmod 600 private_key.pem
-                ssh -i private_key.pem ${{ secrets.USERNAME }} @${{ secrets.HOST_DNS }}
                 ls -a
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
