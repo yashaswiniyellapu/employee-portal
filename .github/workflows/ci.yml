@@ -78,6 +78,7 @@ jobs:
               run:
                 echo "${{secrets.EC2_SSH_KEY}}" > private_key.pem && chmod 600 private_key.pem
                 ssh -i private_key.pem ${{ secrets.USERNAME }} @${{ secrets.HOST_DNS }}
+                ls -a
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
             with:
@@ -91,5 +92,6 @@ jobs:
                       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
                       ansible_ssh_user: ${{secrets.USERNAME}}
                       ansible_ssh_private_key_file: private_key.pem
+              
           
 
