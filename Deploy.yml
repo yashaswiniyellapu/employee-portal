@@ -22,4 +22,4 @@
         command: docker-compose down
     - name: Docker compose up
       shell:
-        command: docker-compose up
+        command: docker-compose up -d
