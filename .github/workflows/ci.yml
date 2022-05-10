@@ -77,12 +77,9 @@ jobs:
               TARGET: ${{ secrets.TARGET_DIR }}
           - name: Create secret-key
             run:
-              echo "$SSH_KEY" > aws_key.pem
+              echo "${{ secrets.EC2_SSH_KEY }}" > aws_key.pem
               chmod 600 aws_key.pem
               ls -a
-            shell: bash
-            env:
-              SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
             with:
@@ -92,7 +89,7 @@ jobs:
               inventory: |
                 web:
                   hosts:
-                    15.206.163.193:
+                    15.207.71.181:
                       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
                       ansible_ssh_user: ${{secrets.USERNAME}}
                       ansible_ssh_private_key_file: aws_key.pem
