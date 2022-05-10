@@ -1,4 +1,4 @@
-localhost:
+web:
   hosts:
     15.206.163.193:
       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
