@@ -76,7 +76,7 @@ jobs:
               REMOTE_USER: ${{ secrets.USERNAME }}
               TARGET: ${{ secrets.TARGET_DIR }}
           - name: Create secret-key
-            run:
+            run: |
               echo "${{ secrets.EC2_SSH_KEY }}" > aws_key.pem
               chmod 400 aws_key.pem
               ls -a
