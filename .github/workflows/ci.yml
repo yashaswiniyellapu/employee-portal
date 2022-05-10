@@ -75,9 +75,12 @@ jobs:
               REMOTE_HOST: ${{ secrets.HOST_DNS }}
               REMOTE_USER: ${{ secrets.USERNAME }}
               TARGET: ${{ secrets.TARGET_DIR }}
-              run:
-                echo "${{secrets.EC2_SSH_KEY}}" > private_key.pem && chmod 600 private_key.pem
-                ls -a
+              SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+            run:
+              echo "$SSH_KEY" > aws_key.pem
+              chmod 600 aws_key.pem
+              ls -a
+            shell: bash
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
             with:
@@ -90,7 +93,7 @@ jobs:
                     15.206.163.193:
                       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
                       ansible_ssh_user: ${{secrets.USERNAME}}
-                      ansible_ssh_private_key_file: private_key.pem
+                      ansible_ssh_private_key_file: aws_key.pem
               
           
 
