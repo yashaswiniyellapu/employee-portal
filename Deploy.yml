@@ -17,6 +17,11 @@
         dest: /usr/local/bin/docker-compose
         mode: 'u+x,g+x
     - name: Docker compose down
-      run: docker-compose down
+      shell:
+        cmd: docker-compose down
     - name: Docker compose up
-      run: docker-compose up docker-compose.yml up -d
+      become: true
+      docker-compose:
+        project_src: ./
+        files:
+        - docker-compose.yml
