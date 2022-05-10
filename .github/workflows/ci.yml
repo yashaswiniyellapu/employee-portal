@@ -75,12 +75,14 @@ jobs:
               REMOTE_HOST: ${{ secrets.HOST_DNS }}
               REMOTE_USER: ${{ secrets.USERNAME }}
               TARGET: ${{ secrets.TARGET_DIR }}
-              SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          - name: Create secret-key
             run:
               echo "$SSH_KEY" > aws_key.pem
               chmod 600 aws_key.pem
               ls -a
             shell: bash
+            env:
+              SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           - name: Run playbook
             uses: dawidd6/action-ansible-playbook@v2
             with:
