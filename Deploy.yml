@@ -17,9 +17,6 @@
         dest: /usr/local/bin/docker-compose
         mode: 'u+x,g+x
     - name: Docker compose down
-      shell:
-        cmd: docker-compose down
+      run: docker-compose down
     - name: Docker compose up
-      shell:
-        cmd: docker-compose up
-
+      run: docker-compose up
