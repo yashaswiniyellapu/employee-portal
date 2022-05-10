@@ -1,5 +1,6 @@
 - name: "Playing with Ansible and Git"
   hosts: web
+  become: yes
   tasks:
     - name: Run apt-update and apt-upgrade
       apt:
