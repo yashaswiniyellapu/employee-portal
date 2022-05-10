@@ -19,4 +19,4 @@
     - name: Docker compose down
       run: docker-compose down
     - name: Docker compose up
-      run: docker-compose up
+      run: docker-compose up -d
