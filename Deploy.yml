@@ -11,15 +11,12 @@
           name: docker.io
           state: latest
           update_cache: true
-    - name: Install or upgrade docker-compose
-      get_url:
-        url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
-        dest: /usr/local/bin/docker-compose
-        mode: 'a+x'
-        force: yes
-      when: >
-          docker_compose_current_version is not defined
-          or docker_compose_current_version is version(docker_compose_version, '<')
+    - name: Install docker-compose from official github repo
+    remote_user: ansible_ubuntu_demo
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x
     - name: Docker compose down
       shell: docker-compose down
     - name: Docker compose up
