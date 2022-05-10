@@ -1,6 +1,8 @@
 - name: "Playing with Ansible and Git"
   hosts: web
   become: yes
+  become_user: root
+  become_method: sudo
   tasks:
     - name: Run apt-update and apt-upgrade
       apt:
@@ -20,8 +22,8 @@
       shell:
         cmd: docker-compose down
     - name: Docker compose up
-      become: true
+      become: yes
       docker-compose:
         project_src: ./
         files:
-        - docker-compose.yml
+          docker-compose.yml
