@@ -1,5 +1,4 @@
-- name: "Playing with Ansible and Git"
-  hosts: web
+- hosts: web
   become: yes
   become_user: root
   become_method: sudo
