@@ -74,6 +74,7 @@ jobs:
               SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
               REMOTE_HOST: ${{ secrets.HOST_DNS }}
               REMOTE_USER: ${{ secrets.USERNAME }}
+              SOURCE: "./docker-compose/"
               TARGET: ${{ secrets.TARGET_DIR }}
           - name: Create secret-key
             run: |
@@ -89,7 +90,7 @@ jobs:
               inventory: |
                 web:
                   hosts:
-                    15.207.71.181:
+                    3.108.219.55:
                       ansible_ssh_extra_args: -o StrictHostKeyChecking=no
                       ansible_ssh_user: ${{secrets.USERNAME}}
                       ansible_ssh_private_key_file: aws_key.pem
