@@ -23,6 +23,7 @@ public class Employee {
     @Column(name = "last_name")
     @NotEmpty(message = "The secondName field must not empty")
     private String lastName;
+    private String password;
     @Column(name = "everest_email_id")
     @Email(message = "The everestEmailId field must contain valid emailId")
     private String everestEmailId;
