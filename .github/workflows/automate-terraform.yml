@@ -16,7 +16,7 @@ jobs:
           tf_actions_subcommand: 'plan'
           tf_actions_working_dir: './terraform'
           tf_actions_comment: true
-          args: '-var='aws_id_list={"ACCESS_ID":"${{ACCESS_ID}}","ACCESS_KEY":"${{AWS_SECRET_KEY}}","REGION":"${{AWS_REGION}}"}''
+          args: '-var='aws_id_list={"ACCESS_ID":"${{ secrets.ACCESS_ID }}","ACCESS_KEY":"${{ secrets.AWS_SECRET_KEY }}","REGION":"${{ secrets.AWS_REGION }}"}''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   terraform-init:
@@ -33,6 +33,6 @@ jobs:
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: './terraform'
           tf_actions_comment: true
-          args: '-var='aws_id_list={"ACCESS_ID":"${{ACCESS_ID}}","ACCESS_KEY":"${{AWS_SECRET_KEY}}","REGION":"${{AWS_REGION}}"}''
+          args: '-var='aws_id_list={"ACCESS_ID":"${{ secrets.ACCESS_ID }}","ACCESS_KEY":"${{ secrets.AWS_SECRET_KEY }}","REGION":"${{ secrets.AWS_REGION }}"}''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
