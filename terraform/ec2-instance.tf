@@ -1,7 +1,16 @@
+variable "aws_id_list" {
+ type = map
+ default = {
+     "ACCESS_ID" = "id"
+     "ACCESS_KEY" = "key"
+     "REGION" = "region"
+ }
+  
+}
 provider "aws" {
-      region = "us-east-1"
-      access_key = "AKIA55FVHWUZN4NXLKU4"
-      secret_key = "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"
+      region = var.aws_id_list.REGION
+      access_key = var.aws_id_list.ACCESS_ID
+      secret_key = var.aws_id_list.ACCESS_KEY
 }
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
