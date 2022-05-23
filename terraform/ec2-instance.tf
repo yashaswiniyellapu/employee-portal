@@ -8,9 +8,9 @@ variable "aws_id_list" {
   
 }
 provider "aws" {
-      region = var.aws_id_list.REGION
-      access_key = var.aws_id_list.ACCESS_ID
-      secret_key = var.aws_id_list.ACCESS_KEY
+      region = var.aws_id_list["REGION"]
+      access_key = var.aws_id_list["ACCESS_ID"]
+      secret_key = var.aws_id_list["ACCESS_KEY"]
 }
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
