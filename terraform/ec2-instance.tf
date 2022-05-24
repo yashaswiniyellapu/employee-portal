@@ -17,7 +17,7 @@ resource "tls_private_key" "ssh" {
   rsa_bits  = 4096
 }
 resource "aws_key_pair" "deployer" {
-  key_name   = "deployer_public_key"
+  key_name   = "deployer_key"
   public_key = tls_private_key.ssh.public_key_openssh
 }
 resource "aws_instance" "employee-portal" {
