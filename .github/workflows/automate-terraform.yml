@@ -37,7 +37,7 @@ jobs:
       - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
-          path: ./terraform
+          path: ./
           auto_approve: true
           variables: |
             aws_region = "${{ secrets.AWS_REGION }}"
@@ -50,3 +50,4 @@ jobs:
          ls -a
     
         
+
