@@ -34,9 +34,8 @@ jobs:
       - name : Run Ansible
         run : |
           terraform init -upgrade 
-          output=$(terraform output public_ip)
-          echo $(output)
-          ansible-playbook -i output, Deploy.yml
+          echo $(terraform output public_ip)
+          ansible-playbook -i $(terraform output public_ip), Deploy.yml
     
         
 
