@@ -81,11 +81,6 @@ resource "aws_security_group" "main" {
     ipv6_cidr_blocks = []
   }
 }
-resource "null_resource" "run-ansible" {
-  provisioner "local-exec" {
-    command = "ansible --version --sudo"
-  }
-}
 output "public_ip" {
 value = aws_instance.employee-portal.public_ip  
 }

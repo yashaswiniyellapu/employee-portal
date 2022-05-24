@@ -12,10 +12,11 @@ jobs:
       - name: showlist of files
         run: |
          ls -a
-      - name: Install ansible
+      - name : Install Ansible
         run: |
           sudo apt-get install -y ansible
-          ansible --version
+          ansible --v
+
       - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
@@ -30,6 +31,8 @@ jobs:
       - name: showlist of files
         run: |
          ls -a
+      - name : Run Ansible
+        run : ansible-playbook -i ${terraform output public_ip}, Deploy.yml
     
         
 
