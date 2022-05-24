@@ -81,11 +81,11 @@ resource "aws_security_group" "main" {
     ipv6_cidr_blocks = []
   }
 }
-resource "null_resource" "run-ansible" {
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, ../ansible/Deploy.yml"
-  }
-}
+# resource "null_resource" "run-ansible" {
+#   provisioner "local-exec" {
+#     command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, ../ansible/Deploy.yml"
+#   }
+# }
 output "public_ip" {
 value = aws_instance.employee-portal.public_ip  
 }
