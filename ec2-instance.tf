@@ -83,7 +83,7 @@ resource "aws_security_group" "main" {
 }
 resource "null_resource" "run-ansible" {
   provisioner "local-exec" {
-    command = "ansible-playbook --version"
+    command = "ansible --version"
   }
 }
 output "public_ip" {
