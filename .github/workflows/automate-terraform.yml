@@ -33,7 +33,7 @@ jobs:
          ls -a
       - name : Run Ansible
         run : |
-          output=${terraform output public_ip} 
+          output=terraform output public_ip
           ansible-playbook -i ouput, Deploy.yml
     
         
