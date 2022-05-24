@@ -47,6 +47,6 @@ jobs:
    steps:
       - name: showlist of files
         run: |
-        cd terraform
-        ls -a
+         cd terraform
+         ls -a
         
