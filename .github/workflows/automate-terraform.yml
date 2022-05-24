@@ -40,7 +40,7 @@ jobs:
             aws_region = "${{ secrets.AWS_REGION }}"
             aws_access_key = "${{ secrets.ACCESS_ID }}"
             aws_secret_key = "${{ secrets.AWS_SECRET_KEY }}"
-          path: ./
+          path: ./terraform
           auto_approve: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
