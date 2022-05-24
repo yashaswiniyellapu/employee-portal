@@ -1,25 +1,11 @@
-variable "aws_id_list" {
- type = map
- default = {
-     "ACCESS_ID" = "id"
-     "ACCESS_KEY" = "key"
-     "REGION" = "region"
- }
-  
-}
 provider "aws" {
-      region = var.aws_id_list["REGION"]
-      access_key = var.aws_id_list["ACCESS_ID"]
-      secret_key = var.aws_id_list["ACCESS_KEY"]
+      region = var.aws_region
+      access_key = var.aws_access_key
+      secret_key = var.aws_secret_key
 }
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
   rsa_bits  = 4096
-}
-resource "local_file" "private_key" {
-  content = tls_private_key.ssh.private_key_pem
-  filename = "deployer_public_key.pem"
-  file_permission = "0600"
 }
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer_public_key"
@@ -31,18 +17,18 @@ resource "aws_instance" "employee-portal" {
   vpc_security_group_ids   = [aws_security_group.main.id]
   associate_public_ip_address = true 
   key_name = aws_key_pair.deployer.key_name
-connection {
-    type     = "ssh"
-    user     = "ubuntu"
-    host     = aws_instance.employee-portal.public_ip
-    private_key = tls_private_key.ssh.private_key_pem
-    host_key = tls_private_key.ssh.public_key_openssh
-    agent = false
-    port = 22
-  }
-provisioner "remote-exec" {
-    inline = ["mkdir yashu"]
-    }
+# connection {
+#     type     = "ssh"
+#     user     = "ubuntu"
+#     host     = aws_instance.employee-portal.public_ip
+#     private_key = tls_private_key.ssh.private_key_pem
+#     host_key = tls_private_key.ssh.public_key_openssh
+#     agent = false
+#     port = 22
+#   }
+# provisioner "remote-exec" {
+#     inline = ["mkdir yashu"]
+#     }
   tags = {
      Name = "employee-portal"
  }
