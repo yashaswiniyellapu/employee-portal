@@ -32,7 +32,9 @@ jobs:
         run: |
          ls -a
       - name : Run Ansible
-        run : ansible-playbook -i ${terraform output public_ip}, Deploy.yml
+        run : |
+          output=${terraform output public_ip} 
+          ansible-playbook -i ouput, Deploy.yml
     
         
 
