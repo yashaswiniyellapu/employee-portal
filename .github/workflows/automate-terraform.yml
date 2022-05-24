@@ -46,5 +46,7 @@ jobs:
    needs: [terraform-apply]
    steps:
       - name: showlist of files
-        shell: cd terraform && ls -a
+        run: |
+        cd terraform
+        ls -a
         
