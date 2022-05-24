@@ -33,6 +33,7 @@ jobs:
          ls -a
       - name : Run Ansible
         run : |
+          terraform init -upgrade 
           echo $(terraform output public_ip)
           ansible-playbook -i ouput, Deploy.yml
     
