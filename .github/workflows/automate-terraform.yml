@@ -3,26 +3,6 @@ on:
   push:
     branch: [wip_terraform]
 jobs:
-
-  terraform-init:
-    name: 'Terraform (init)'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@master
-      - name: 'Terraform Init'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: './terraform'
-          tf_actions_comment: true
-        env:
-          TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
-          TF_VAR_aws_access_key: ${{ secrets.ACCESS_ID }}
-          TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   terraform-apply:
     name: Apply terraform
     runs-on: ubuntu-latest
@@ -33,7 +13,10 @@ jobs:
         run: |
          ls -a
       - name: Install ansible
-        run: sudo apt install ansible
+        run: |
+          sudo apt update
+          sudo apt upgrade
+          sudo apt install ansible
       - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
