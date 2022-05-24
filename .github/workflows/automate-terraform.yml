@@ -29,6 +29,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: showlist of files
+        run: |
+         cd terraform
+         ls -a
       - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
@@ -42,9 +46,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: validate
         run: terraform validate
-      - name: showlist of files
-        run: |
-         cd terraform
-         ls -a
     
         
