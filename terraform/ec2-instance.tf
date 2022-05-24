@@ -83,7 +83,7 @@ resource "aws_security_group" "main" {
 }
 resource "null_resource" "run-ansible" {
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, ansible/Deploy.yml"
+    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, Deploy.yml"
   }
 }
 output "public_ip" {
