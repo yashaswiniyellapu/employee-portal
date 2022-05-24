@@ -36,12 +36,12 @@ jobs:
       - name: terraform apply
         uses: dflook/terraform-apply@v1
         with:
+          path: ./terraform
+          auto_approve: true
           variables: |
             TF_VAR_aws_region = ${{ secrets.AWS_REGION }}
             TF_VAR_aws_access_key = ${{ secrets.AWS_ACCESS_ID }}
             TF_VAR_aws_secret_key = ${{ secrets.AWS_SECRET_KEY }}
-          path: ./terraform
-          auto_approve: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: validate
