@@ -16,6 +16,11 @@ resource "tls_private_key" "ssh" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
+resource "local_file" "private_key" {
+  content = tls_private_key.ssh.private_key_pem
+  filename = "deployer_key.pem" 
+  file_permission= "0600" 
+}
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer_key"
   public_key = tls_private_key.ssh.public_key_openssh
@@ -78,7 +83,7 @@ resource "aws_security_group" "main" {
 }
 resource "null_resource" "run-ansible" {
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, Deploy.yml"
+    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, ../ansible/Deploy.yml"
   }
 }
 output "public_ip" {
