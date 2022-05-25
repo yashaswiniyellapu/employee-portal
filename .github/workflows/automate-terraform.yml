@@ -3,39 +3,34 @@ on:
   push:
     branch: [wip_terraform]
 jobs:
-  terraform-apply:
-    name: Apply terraform
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: showlist of files
+      - name: 'Install Required Packages'
         run: |
-         ls -a
-      - name : Install Ansible
-        run: |
+          ls -a
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
           sudo apt-get install -y ansible
-          ansible --version
-
-      - name: terraform apply
-        uses: dflook/terraform-apply@v1
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
         with:
-          path: ./
-          auto_approve: true
-          variables: |
-            aws_region = "${{ secrets.AWS_REGION }}"
-            aws_access_key = "${{ secrets.AWS_ACCESS_ID }}"
-            aws_secret_key = "${{ secrets.AWS_SECRET_KEY }}"
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+          args: '-backend-config="access_key=${{ secrets.AWS_ACCESS_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY}}"'
         env:
+          TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_ID }}
+          TF_VAR_aws_secret_key: ${{ secrets.AWS_ACCESS_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: showlist of files
-        run: |
-         ls -a
-      - name : Run Ansible
-        run : |
-          terraform init -upgrade 
-          echo $(terraform output public_ip)
-          ansible-playbook -i $(terraform output public_ip), Deploy.yml
-    
+      - name: 'Show Plan'
+        run: terraform plan
+      - name: 'Deploy terraform'
+        run: terraform apply -auto-approve
+      - name: 'Show list of files'
+        run: ls -a
         
 

@@ -22,7 +22,7 @@
         mode: 'u+x,g+x'
     - name: Copy file with owner and permissions
       ansible.builtin.copy:
-        src: ../docker-compose/
+        src: ./docker-compose/
         dest: ./
     - name: Show directory
       shell:  ls

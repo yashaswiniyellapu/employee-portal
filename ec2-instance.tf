@@ -5,7 +5,8 @@ variable "aws_secret_key" {
  type = string  
 }
 variable "aws_region" {
- type = string  
+ type = string 
+ default = "us-east-1" 
 }
 provider "aws" {
       region = var.aws_region
@@ -31,22 +32,9 @@ resource "aws_instance" "employee-portal" {
   vpc_security_group_ids   = [aws_security_group.main.id]
   associate_public_ip_address = true 
   key_name = aws_key_pair.deployer.key_name
-# connection {
-#     type     = "ssh"
-#     user     = "ubuntu"
-#     host     = aws_instance.employee-portal.public_ip
-#     private_key = tls_private_key.ssh.private_key_pem
-#     host_key = tls_private_key.ssh.public_key_openssh
-#     agent = false
-#     port = 22
-#   }
-# provisioner "remote-exec" {
-#     inline = ["mkdir yashu"]
-#     }
   tags = {
-     Name = "employee-portal"
+    Name = "employee-portal"
  }
-  
 }
 resource "aws_security_group" "main" {
   ingress {
@@ -80,6 +68,35 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = []
   }
+}
+resource "aws_s3_bucket" "tf_state" {
+  bucket = "yashu-terraform"
+
+}
+
+resource "aws_s3_bucket_acl" "acl" {
+  bucket = aws_s3_bucket.tf_state.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "versioning_tf_state" {
+  bucket = aws_s3_bucket.tf_state.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+terraform {
+  backend "s3" {
+    bucket = "yashu-terraform"
+    key    = "yashu/s3/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+resource "null_resource" "ansible" {
+    provisioner "local-exec" {
+    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, Deploy.yml"
+  }
+  
 }
 output "public_ip" {
 value = aws_instance.employee-portal.public_ip  
