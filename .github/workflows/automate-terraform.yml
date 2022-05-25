@@ -23,8 +23,7 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
           args: |
-            '-var="aws_access_key=${{ secrets.AWS_ACCESS_ID }}"'
-            '-var="aws_secret_key=${{ secrets.AWS_SECRET_KEY }}'
+            '-var="aws_access_key=${{ secrets.AWS_ACCESS_ID }}" "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}'
             '-backend-config="access_key=${{ secrets.AWS_ACCESS_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY}}"'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
