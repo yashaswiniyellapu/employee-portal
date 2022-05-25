@@ -25,7 +25,7 @@ jobs:
           args:
             '-backend-config="access_key=${{ secrets.AWS_ACCESS_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY}}"'
         env:
-          TF_CLI_ARGS_init: '-var="aws_access_key=${{ secrets.AWS_ACCESS_ID }}" "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}'
+          TF_CLI_ARGS: '-var="aws_access_key=${{ secrets.AWS_ACCESS_ID }}" "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Show Plan'
         run: terraform plan
