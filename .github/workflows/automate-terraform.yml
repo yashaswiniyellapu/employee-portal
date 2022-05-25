@@ -29,10 +29,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Deploy terraform'
-        run: terraform apply -auto-approve
-        env:
-          aws_access_key: ${{ secrets.AWS_SECRET_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        run: terraform apply -var aws_access_key="${{ secrets.AWS_ACCESS_ID }}" aws_secret_key="${{ secrets.AWS_SECRET_KEY }}" -auto-approve
       - name: 'Show list of files'
         run: ls -a
         
