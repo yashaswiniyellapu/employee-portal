@@ -15,7 +15,6 @@ jobs:
           sudo apt-get update -y
           sudo apt-get upgrade -y
           sudo apt-get install -y ansible
-          sudo apt-get install terraform
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -26,7 +25,8 @@ jobs:
           args:
             '-backend-config="access_key=${{ secrets.AWS_ACCESS_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY}}"'
         env:
-          TF_CLI_ARGS: '-var="aws_access_key=${{ secrets.AWS_ACCESS_ID }}" "aws_secret_key=${{ secrets.AWS_SECRET_KEY }}'
+          aws_access_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Show Plan'
         run: terraform plan
