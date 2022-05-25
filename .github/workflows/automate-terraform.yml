@@ -28,10 +28,11 @@ jobs:
           aws_access_key: ${{ secrets.AWS_SECRET_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Show Plan'
-        run: terraform plan
       - name: 'Deploy terraform'
         run: terraform apply -auto-approve
+        env:
+          aws_access_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
       - name: 'Show list of files'
         run: ls -a
         
