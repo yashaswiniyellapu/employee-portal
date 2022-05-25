@@ -15,6 +15,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get upgrade -y
           sudo apt-get install -y ansible
+          sudo apt-get install terraform
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
