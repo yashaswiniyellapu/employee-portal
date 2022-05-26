@@ -26,6 +26,8 @@ services:
   app-client:
     image: 'yashuyellapu/employee-portal-fullstack:frontend-latest'
     container_name: frontend
+    env_file:
+      - .env
     ports:
       - 3000:3000
 

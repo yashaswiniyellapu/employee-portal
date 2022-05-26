@@ -3,8 +3,8 @@ import axios from "axios";
 //    headers: { "Content-Type":"application/json",
 //"Access-Control-Allow-Origin":"*",
 //  };
-const API_BASE_URL = 'http://13.233.117.57:8080'
-
+const API_BASE_URL = `http://${process.env.REACT_APP_BACKEND_IP}:8080`
+console.log(process.env.REACT_APP_BACKEND_IP)
 export function fetchEmployees() {
     return axios.get(`${API_BASE_URL}/api/employees`);
 }

@@ -34,3 +34,5 @@ build/
 .vscode/
 .terraform
 .terraform.lock.hcl
+*.pem
+docker-compose/.env
