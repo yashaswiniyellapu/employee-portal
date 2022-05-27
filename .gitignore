@@ -15,11 +15,11 @@ target/
 ### DS_STORE ####
 .DS_Store
 ### IntelliJ IDEA ###
-.idea
+.idea/*
 *.iws
 *.iml
 *.ipr
-
+.idea
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -32,3 +32,7 @@ build/
 
 ### VS Code ###
 .vscode/
+.terraform
+.terraform.lock.hcl
+*.pem
+docker-compose/.env
