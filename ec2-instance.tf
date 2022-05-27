@@ -96,12 +96,12 @@ resource "local_file" "backend_ip" {
     content  = "REACT_APP_BACKEND_IP=${aws_instance.employee-portal.public_ip}"
     filename = "${path.root}/docker-compose/.env"
 }
-resource "null_resource" "ansible" {
-    provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, Deploy.yml"
-  }
+# resource "null_resource" "ansible" {
+#     provisioner "local-exec" {
+#     command = "ansible-playbook -i ${aws_instance.employee-portal.public_ip}, Deploy.yml"
+#   }
   
-}
+# }
 output "public_ip" {
 value = aws_instance.employee-portal.public_ip  
 }

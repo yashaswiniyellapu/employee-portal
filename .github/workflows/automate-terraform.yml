@@ -81,5 +81,7 @@ jobs:
           TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
       - name: 'Show list of files'
         run: ls -a
+      - name: 'Run Ansible Playbook'
+        run: ansible-playbook -i $(terraform output public_ip), Deploy.yml
         
 
